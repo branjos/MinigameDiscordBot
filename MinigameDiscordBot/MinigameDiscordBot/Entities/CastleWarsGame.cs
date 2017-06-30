@@ -25,18 +25,18 @@ namespace MinigamesDiscordBot.Entities
         public string AddPerm(string user, string side)
         {
             CwsUser u = new CwsUser(user);
-            if (!saradominTeam.Contains(u) && !zamorakTeam.Contains(u))
+            CwsUser u2 = new CwsUser(user + "*");
+            if (!saradominTeam.Contains(u) && !zamorakTeam.Contains(u) && !saradominTeam.Contains(u2) && 
+                !zamorakTeam.Contains(u2))
             {
                 if (side == "sara")
                 {
-                    u.Username += "*";
-                    saradominTeam.Add(u);
+                    saradominTeam.Add(u2);
                     return u.Username + " has been added as a perm to the Saradomin team.";
                 }
                 else if (side == "zam")
                 {
-                    u.Username += "*";
-                    zamorakTeam.Add(u);
+                    zamorakTeam.Add(u2);
                     return u.Username + " has been added as a perm to the Zamorak team.";
                 }
                 else
@@ -54,8 +54,9 @@ namespace MinigamesDiscordBot.Entities
         public string AddRotating(string user)
         {
             CwsUser u = new CwsUser(user);
-
-            if (!saradominTeam.Contains(u) && !zamorakTeam.Contains(u))
+            CwsUser u2 = new CwsUser(user + "*");
+            if (!saradominTeam.Contains(u) && !zamorakTeam.Contains(u) && !saradominTeam.Contains(u2) &&
+                !zamorakTeam.Contains(u2))
             {
                 if(saradominTeam.Count == zamorakTeam.Count)
                 {
@@ -86,24 +87,32 @@ namespace MinigamesDiscordBot.Entities
         public string RemoveUser(string user)
         {
             CwsUser u = new CwsUser(user);
+            CwsUser u2 = new CwsUser(user + "*");
 
-            if ((!saradominTeam.Contains(u) && !zamorakTeam.Contains(u)))
+            if (saradominTeam.Contains(u))
             {
-                return user + " was not on any teams!";
+                saradominTeam.Remove(u);
+                return user + " was removed from the Saradomin team.";
+            }             
+            else if (zamorakTeam.Contains(u))
+            {
+                zamorakTeam.Remove(u);
+                return user + " was removed from the Zamorak team.";
+            }
+            else if (saradominTeam.Contains(u2))
+            {
+                saradominTeam.Remove(u2);
+                return user + " was removed from the Saradomin team.";
+            }
+            else if (zamorakTeam.Contains(u2))
+            {
+                zamorakTeam.Remove(u2);
+                return user + " was removed from the Zamorak team.";
             }
             else
             {
-                if (saradominTeam.Contains(u))
-                {
-                    saradominTeam.Remove(u);
-                    return user + " was removed from the Saradomin team.";
-                }             
-                else
-                {
-                    zamorakTeam.Remove(u);
-                    return user + " was removed from the Zamorak team.";
-                }
-            }
+                return user + " was not on any teams!";
+            }           
         }
 
         //clears all from game (games closed)
@@ -173,17 +182,18 @@ namespace MinigamesDiscordBot.Entities
                     //check to see the most consecutive wins
                     foreach(CwsUser u in saradominTeam)
                     {
-                       if (u.ConsecutiveWins > mostWins)
-                       {
-                           mostWins = u.ConsecutiveWins;
-                       }
+                        //if user has more wins than the last person and is not a perm member
+                        if (u.ConsecutiveWins > mostWins && !CheckIfPerm(u)) 
+                        {
+                            mostWins = u.ConsecutiveWins;
+                        }
                     }
 
                     //loop thorugh all users finding a user who matches the most consecutive wins
                     for(int i = 0; i < saradominTeam.Count; ++i)
                     {
                         //if it meets mostWins
-                        if(saradominTeam[i].ConsecutiveWins == mostWins)
+                        if(saradominTeam[i].ConsecutiveWins == mostWins && !CheckIfPerm(saradominTeam[i]))
                         {
                             zamorakTeam.Add(saradominTeam[i]); //add user to zam team
                             saradominTeam.RemoveAt(i); //remove user from sara team
@@ -191,6 +201,7 @@ namespace MinigamesDiscordBot.Entities
                             break; //exit the loop
                         }
                     }
+                  
                 }
 
             }
@@ -207,7 +218,7 @@ namespace MinigamesDiscordBot.Entities
                     //check to see the most consecutive wins
                     foreach (CwsUser u in zamorakTeam)
                     {
-                        if (u.ConsecutiveWins < leastWins)
+                        if (u.ConsecutiveWins < leastWins && !CheckIfPerm(u))
                         {
                             leastWins = u.ConsecutiveWins;
                         }
@@ -217,7 +228,7 @@ namespace MinigamesDiscordBot.Entities
                     for (int i = 0; i < zamorakTeam.Count; ++i)
                     {
                         //if it meets mostWins
-                        if (zamorakTeam[i].ConsecutiveWins == leastWins)
+                        if (zamorakTeam[i].ConsecutiveWins == leastWins && !CheckIfPerm(zamorakTeam[i]))
                         {
                             saradominTeam.Add(saradominTeam[i]); //add user to sara team
                             zamorakTeam.RemoveAt(i); //remove user from zam team
@@ -282,6 +293,18 @@ namespace MinigamesDiscordBot.Entities
             else
             {
                 return "```\n No games are currently running.\n```";
+            }
+        }
+
+        private bool CheckIfPerm(CwsUser u)
+        {
+            if (u.Username.Contains("*"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

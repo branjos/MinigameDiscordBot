@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MinigamesDiscordBot.CommandModules
 {
-    [Group("cws")]
+    //[Group("cws")]
     class CastleWarsModule : ModuleBase
     {
 
@@ -73,7 +73,7 @@ namespace MinigamesDiscordBot.CommandModules
                 await UpdateTextChannel();
             }
             
-            await ReplyAsync("You are not the game coordinator or a server owner.");         
+            await ReplyAsync(output);         
         }
 
         [Command("AddR")] //for add rotations
@@ -125,6 +125,7 @@ namespace MinigamesDiscordBot.CommandModules
                 _game.ClearGame();
                 _game.GameGoing = false;
                 await UpdateTextChannel();
+                await ReplyAsync("Games are now ended.");
             }
             else
             {
@@ -147,7 +148,7 @@ namespace MinigamesDiscordBot.CommandModules
         
         private async Task UpdateTextChannel()
         {
-            SocketGuild guild = _client.GetGuild(Config.CWS_CHANNEL);//loads server info
+            SocketGuild guild = _client.GetGuild(Config.SERVER_ID);//loads server info
             SocketTextChannel channel = guild.GetTextChannel(Config.CWS_CHANNEL); //loads channel info
 
             //delete any and all previous messages

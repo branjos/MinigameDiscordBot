@@ -100,7 +100,8 @@ namespace MinigamesDiscordBot
             // add Modules manually 
             await _commands.AddModuleAsync<CastleWarsModule>();
             await _commands.AddModuleAsync<GeobieBandsModule>();
-            
+            await _commands.AddModuleAsync<HelpModule>();
+
 
             // Subscribe a handler to see if a message invokes a command.
             _client.MessageReceived += HandleCommandAsync;
