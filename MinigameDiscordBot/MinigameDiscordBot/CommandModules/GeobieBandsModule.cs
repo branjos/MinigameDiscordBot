@@ -1,35 +1,54 @@
-﻿using Discord.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Discord;
+using Discord.Commands;
+using Discord.WebSocket;
+using MinigameDiscordBot.Entities;
 using System.Threading.Tasks;
 
 namespace MinigamesDiscordBot.CommandModules
 {
     class GeobieBandsModule : ModuleBase
     {
-        List<string> usernames = new List<string>();
+        GeobieBands _bands;
+        DiscordSocketClient _client;
 
-        [Command("s")]
-        public async Task Scout([Remainder]string username)
+        public GeobieBandsModule(GeobieBands bands, DiscordSocketClient client)
         {
-            string[] user = username.Split('-');
-            usernames.Add(user[0]);
-            await ReplyAsync(user[0] + " has been registered as a scout.");
+            _bands = bands;
+            _client = client;
         }
 
-        [Command("PrintScouts")]
+        [Command("s")]
+        public async Task Scout(int world, string skill, [Remainder]string username)
+        {
+            await ReplyAsync(_bands.AddWorld(username, world, skill));
+            await UpdateTextChannel();
+        }
+
+        [Command("ClearInfo")]
         public async Task PrintScouts()
         {
-            string output = "```\n";
-            for(int i = 0; i < usernames.Count; ++i)
-            {
-                output += usernames[i] + "\n";
-            }
-            output += "```";
+            await ReplyAsync(_bands.ClearInfo());
+            await UpdateTextChannel();
+        }
 
-            await ReplyAsync(output);
+        [Command("Refresh")]
+        public async Task RefreshInfo()
+        {
+            await UpdateTextChannel();
+        }
+
+
+        private async Task UpdateTextChannel()
+        {
+            SocketGuild guild = _client.GetGuild(Config.SERVER_ID);//loads server info
+            SocketTextChannel channel = guild.GetTextChannel(Config.GEOBIE_CHANNEL); //loads channel info
+
+            //delete any and all previous messages
+            var messages = await channel.GetMessagesAsync(100).Flatten();
+            await channel.DeleteMessagesAsync(messages);
+
+            //give output
+            await channel.SendMessageAsync(_bands.GetOutput());
         }
     }
 }

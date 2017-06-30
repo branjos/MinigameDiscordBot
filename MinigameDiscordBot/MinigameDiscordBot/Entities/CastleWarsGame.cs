@@ -163,6 +163,7 @@ namespace MinigamesDiscordBot.Entities
             }
 
             EvenOutSides(); //to ensure sides are even
+            startTime = DateTime.Now; //update starttime to reflect when new round started.
 
             return "New teams assigned.";
         }

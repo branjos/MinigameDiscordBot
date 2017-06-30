@@ -2,6 +2,7 @@
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
+using MinigameDiscordBot.Entities;
 using MinigamesDiscordBot.CommandModules;
 using MinigamesDiscordBot.Entities;
 using System;
@@ -92,6 +93,7 @@ namespace MinigamesDiscordBot
             // Repeat this for all the service classes
             // and other dependencies that your commands might need.
             _map.AddSingleton(new CastleWarsGame());
+            _map.AddSingleton(new GeobieBands());
             _map.AddSingleton(_client);
 
             // When all your required services are in the collection, build the container.

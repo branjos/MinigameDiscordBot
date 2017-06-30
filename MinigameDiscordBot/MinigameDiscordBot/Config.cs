@@ -9,6 +9,7 @@ namespace MinigamesDiscordBot
         public static string BOT_TOKEN = ""; //bot's token
         public static ulong SERVER_ID = 0; //servers unique id
         public static ulong CWS_CHANNEL = 0; //output channel for cws
+        public static ulong GEOBIE_CHANNEL = 0; //output for geobiebands
 
         //read the contents of config.txt
         public static void GetConfigInfo()
@@ -29,6 +30,7 @@ namespace MinigamesDiscordBot
                     BOT_TOKEN = csv[0];
                     SERVER_ID = Convert.ToUInt64(csv[1]);
                     CWS_CHANNEL = Convert.ToUInt64(csv[2]);
+                    GEOBIE_CHANNEL = Convert.ToUInt64(csv[3]);
                 }
             }
             sr.Dispose(); //IMPORTANT - must dispose the stream
