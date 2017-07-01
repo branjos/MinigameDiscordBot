@@ -3,7 +3,7 @@ using System;
 
 namespace MinigameDiscordBot.Entities
 {
-    class GeobieUser : System.IEquatable<GeobieUser>
+    class GeobieUser : IEquatable<GeobieUser>
     {
         public string Username { get; set; }
         public int NumberOfScouts { get; set; }

@@ -37,6 +37,13 @@ namespace MinigamesDiscordBot.CommandModules
             await UpdateTextChannel();
         }
 
+        [Command("Dead")]
+        public async Task MarkWorldAsDead(int world)
+        {
+            await ReplyAsync(_bands.MarkAsDead(world));
+            await UpdateTextChannel();
+        }
+
 
         private async Task UpdateTextChannel()
         {
