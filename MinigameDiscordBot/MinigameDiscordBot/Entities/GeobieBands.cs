@@ -28,6 +28,11 @@ namespace MinigameDiscordBot.Entities
             {
                 worlds[i] = "";
             }
+
+            skill1.Clear();
+            skill2.Clear();
+            skill3.Clear();
+
             for(int i = 0; i < users.Count; ++i)
             {
                 users[i].CurrentScouter = false;
@@ -37,6 +42,7 @@ namespace MinigameDiscordBot.Entities
             return "Information cleared.";
         }
 
+        //clears all of the users total caps 
         public string ClearInfoMonthly()
         {
             for(int i = 0; i < users.Count; ++i)
@@ -304,7 +310,7 @@ namespace MinigameDiscordBot.Entities
         {
             List<string> output = new List<string>();
 
-            OutputFormatting f = new OutputFormatting("User", 15, "Scouts", 5);
+            OutputFormatting f = new OutputFormatting("User", 15, "Scouts", 7);
 
             for(int i = 0; i < users.Count; ++i)
             {

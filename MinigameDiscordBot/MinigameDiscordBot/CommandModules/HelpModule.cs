@@ -26,6 +26,7 @@ namespace MinigamesDiscordBot.CommandModules
             output += "`_Dead <world>` Make a world dead.\n";
             output += "`_RemoveWorld <world>` Removes a world from the list.\n";
             output += "`_ClearInfo` Clears the current geobiebands info.\n";
+            output += "`_OutputTotals` Prints out total number of scouts per user.\n";
 
             await ReplyAsync(output);
         }
