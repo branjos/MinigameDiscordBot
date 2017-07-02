@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MinigameDiscordBot.Util;
+using System;
 using System.Collections.Generic;
 
 namespace MinigameDiscordBot.Entities
@@ -30,9 +31,19 @@ namespace MinigameDiscordBot.Entities
             for(int i = 0; i < users.Count; ++i)
             {
                 users[i].CurrentScouter = false;
+                users[i].NumCurrentScouts = 0;
             }
 
             return "Information cleared.";
+        }
+
+        public string ClearInfoMonthly()
+        {
+            for(int i = 0; i < users.Count; ++i)
+            {
+                users[i].NumberOfScouts = 0;
+            }
+            return "Info cleared monthly.";
         }
 
         //adds a world the the list with the user who entered it
@@ -288,6 +299,34 @@ namespace MinigameDiscordBot.Entities
             return output;
         }
 
+        //outputs users total scouts
+        public List<string> OutputTotalScouts()
+        {
+            List<string> output = new List<string>();
+
+            OutputFormatting f = new OutputFormatting("User", 15, "Scouts", 5);
+
+            for(int i = 0; i < users.Count; ++i)
+            {
+                if (f.output.Length >= 1900)
+                {
+                    f.insertEnd();
+                    output.Add(f.output);
+                    f = new OutputFormatting("Name", 16, "Status", 10);
+                }
+
+                f.addLine(users[i].Username, users[i].NumberOfScouts.ToString());
+
+                if(i + 1 == users.Count)
+                {
+                    f.insertEnd();
+                    output.Add(f.output);
+                }
+            }
+
+            return output;
+        }
+
         //check if user is on the list
         private bool IsUserRegistered(GeobieUser user)
         {
@@ -419,6 +458,8 @@ namespace MinigameDiscordBot.Entities
 
             return found;
         }
+
+
 
         private void WriteToFile()
         {

@@ -2,6 +2,7 @@
 using Discord.Commands;
 using Discord.WebSocket;
 using MinigameDiscordBot.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MinigamesDiscordBot.CommandModules
@@ -49,6 +50,17 @@ namespace MinigamesDiscordBot.CommandModules
         {
             await ReplyAsync(_bands.RemoveWorld(worldNum));
             await UpdateTextChannel();
+        }
+
+        [Command("OutputTotals")]
+        public async Task OutputMonthlyTotals()
+        {
+            List<string> output = _bands.OutputTotalScouts();
+
+            for(int i = 0; i < output.Count; ++i)
+            {
+                await ReplyAsync(output[i]);
+            }
         }
 
 
