@@ -94,86 +94,83 @@ namespace MinigameDiscordBot.Entities
         //returns the output for geobiebands
         public string GetOutput()
         {
-            List<GeobieWorld> newSkill1 = skill1.OrderBy(o => o.WorldNum).ToList();
-            List<GeobieWorld> newSkill2 = skill2.OrderBy(o => o.WorldNum).ToList();
-            List<GeobieWorld> newSkill3 = skill3.OrderBy(o => o.WorldNum).ToList();
 
             worlds[0] = "";
             worlds[1] = "";
             worlds[2] = "";
 
-            for(int i = 0; i < newSkill1.Count; ++i)
+            for(int i = 0; i < skill1.Count; ++i)
             {
                 if(i == 0)
                 {
-                    if (!newSkill1[i].IsDead)
+                    if (!skill1[i].IsDead)
                     {
-                        worlds[0] += "**" + newSkill1[i].WorldNum.ToString() + "**";
+                        worlds[0] += "**" + skill1[i].WorldNum.ToString() + "**";
                     }
                     else
                     {
-                        worlds[0] += "~~" + newSkill1[i].WorldNum.ToString() + "~~";
+                        worlds[0] += "~~" + skill1[i].WorldNum.ToString() + "~~";
                     }
                 }
                 else
                 {
-                    if (!newSkill1[i].IsDead)
+                    if (!skill1[i].IsDead)
                     {
-                        worlds[0] += ", **" + newSkill1[i].WorldNum.ToString() + "**";
+                        worlds[0] += ", **" + skill1[i].WorldNum.ToString() + "**";
                     }
                     else
                     {
-                        worlds[0] += ", ~~" + newSkill1[i].WorldNum.ToString() + "~~";
+                        worlds[0] += ", ~~" + skill1[i].WorldNum.ToString() + "~~";
                     }
                 }
             }
-            for (int i = 0; i < newSkill2.Count; ++i)
+            for (int i = 0; i < skill2.Count; ++i)
             {
                 if (i == 0)
                 {
-                    if (!newSkill2[i].IsDead)
+                    if (!skill2[i].IsDead)
                     {
-                        worlds[1] += "**" + newSkill2[i].WorldNum.ToString() + "**";
+                        worlds[1] += "**" + skill2[i].WorldNum.ToString() + "**";
                     }
                     else
                     {
-                        worlds[1] += "~~" + newSkill2[i].WorldNum.ToString() + "~~";
+                        worlds[1] += "~~" + skill2[i].WorldNum.ToString() + "~~";
                     }
                 }
                 else
                 {
-                    if (!newSkill2[i].IsDead)
+                    if (!skill2[i].IsDead)
                     {
-                        worlds[1] += ", **" + newSkill2[i].WorldNum.ToString() + "**";
+                        worlds[1] += ", **" + skill2[i].WorldNum.ToString() + "**";
                     }
                     else
                     {
-                        worlds[1] += ", ~~" + newSkill2[i].WorldNum.ToString() + "~~";
+                        worlds[1] += ", ~~" + skill2[i].WorldNum.ToString() + "~~";
                     }
                 }
             }
-            for (int i = 0; i < newSkill3.Count; ++i)
+            for (int i = 0; i < skill3.Count; ++i)
             {
                 if (i == 0)
                 {
-                    if (!newSkill3[i].IsDead)
+                    if (!skill3[i].IsDead)
                     {
-                        worlds[2] += "**" + newSkill3[i].WorldNum.ToString() + "**";
+                        worlds[2] += "**" + skill3[i].WorldNum.ToString() + "**";
                     }
                     else
                     {
-                        worlds[2] += "~~" + newSkill3[i].WorldNum.ToString() + "~~";
+                        worlds[2] += "~~" + skill3[i].WorldNum.ToString() + "~~";
                     }
                 }
                 else
                 {
-                    if (!newSkill3[i].IsDead)
+                    if (!skill3[i].IsDead)
                     {
-                        worlds[2] += ", **" + newSkill3[i].WorldNum.ToString() + "**";
+                        worlds[2] += ", **" + skill3[i].WorldNum.ToString() + "**";
                     }
                     else
                     {
-                        worlds[2] += ", ~~" + newSkill3[i].WorldNum.ToString() + "~~";
+                        worlds[2] += ", ~~" + skill3[i].WorldNum.ToString() + "~~";
                     }
                 }
             }
