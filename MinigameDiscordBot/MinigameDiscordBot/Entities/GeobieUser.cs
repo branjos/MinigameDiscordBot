@@ -7,6 +7,8 @@ namespace MinigameDiscordBot.Entities
     {
         public string Username { get; set; }
         public int NumberOfScouts { get; set; }
+        public bool CurrentScouter { get; set; }
+        public int NumCurrentScouts { get; set; }
 
         public GeobieUser(string username)
         {
@@ -20,5 +22,7 @@ namespace MinigameDiscordBot.Entities
             if (other.Username == Username) { return true; }
             else { return false; }
         }
+
+
     }
 }

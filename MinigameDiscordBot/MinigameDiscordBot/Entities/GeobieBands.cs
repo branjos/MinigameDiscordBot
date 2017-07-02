@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MinigameDiscordBot.Entities
 {
     class GeobieBands
     {
         List<GeobieUser> users = new List<GeobieUser>();
-        List<string> currentScouters = new List<string>();
 
         string[] skills = { "Agility/Crafting: ", "Farming/Herblore: ", "Hunter/Woodcutting: "};
         List<GeobieWorld> skill1 = new List<GeobieWorld>();
@@ -29,7 +27,10 @@ namespace MinigameDiscordBot.Entities
             {
                 worlds[i] = "";
             }
-            currentScouters.Clear();
+            for(int i = 0; i < users.Count; ++i)
+            {
+                users[i].CurrentScouter = false;
+            }
 
             return "Information cleared.";
         }
@@ -51,28 +52,16 @@ namespace MinigameDiscordBot.Entities
                 {
                     case "a":
                         AddScoutToUSer(u);
-                        if (!currentScouters.Contains(u.Username) && !CheckIfWorldIsUsed(w))
-                        {
-                            currentScouters.Add(u.Username);
-                        }
                         AddWorldToSkill("agil", w);
                         output = u.Username + " added as a scout.";
                         break;
                     case "f":
                         AddScoutToUSer(u);
-                        if (!currentScouters.Contains(u.Username) && !CheckIfWorldIsUsed(w))
-                        {
-                            currentScouters.Add(u.Username);
-                        }
                         AddWorldToSkill("farm", w);
                         output = u.Username + " added as a scout.";
                         break;
                     case "w":
                         AddScoutToUSer(u);
-                        if (!currentScouters.Contains(u.Username) && !CheckIfWorldIsUsed(w))
-                        {
-                            currentScouters.Add(u.Username);
-                        }
                         AddWorldToSkill("hunt", w);
                         output = u.Username + " added as a scout.";
                         break;
@@ -185,9 +174,12 @@ namespace MinigameDiscordBot.Entities
 
             output += "\n";
             output += "**Scouters** \n";
-            for(int i = 0; i < currentScouters.Count; ++i)
+            for(int i = 0; i < users.Count; ++i)
             {
-                output += currentScouters[i] + "\n";
+                if (users[i].CurrentScouter)
+                {
+                    output += users[i].Username + "\n";
+                }
             }
 
             return output;
@@ -249,9 +241,10 @@ namespace MinigameDiscordBot.Entities
                 {
                     if (w.Equals(skill1[i]))
                     {
-                        if (currentScouters.Contains(skill1[i].ScoutName))
+                        GeobieUser u = new GeobieUser(skill1[i].ScoutName);
+                        if (users.Contains(u))
                         {
-                            currentScouters.Remove(skill1[i].ScoutName);
+                            RemoveScoutFromUser(u.Username);
                         }
                     }
                 }
@@ -263,9 +256,10 @@ namespace MinigameDiscordBot.Entities
                 {
                     if (w.Equals(skill2[i]))
                     {
-                        if (currentScouters.Contains(skill2[i].ScoutName))
+                        GeobieUser u = new GeobieUser(skill2[i].ScoutName);
+                        if (users.Contains(u))
                         {
-                            currentScouters.Remove(skill2[i].ScoutName);
+                            RemoveScoutFromUser(u.Username);
                         }
                     }
                 }
@@ -277,9 +271,10 @@ namespace MinigameDiscordBot.Entities
                 {
                     if (w.Equals(skill3[i]))
                     {
-                        if (currentScouters.Contains(skill3[i].ScoutName))
+                        GeobieUser u = new GeobieUser(skill3[i].ScoutName);
+                        if (users.Contains(u))
                         {
-                            currentScouters.Remove(skill3[i].ScoutName);
+                            RemoveScoutFromUser(u.Username);
                         }
                     }
                 }
@@ -313,9 +308,15 @@ namespace MinigameDiscordBot.Entities
             {
                 foreach (GeobieUser user in users)
                 {
-                    if (u.Username == user.Username)
+                    if (u.Username == user.Username && !user.CurrentScouter)
                     {
-                        u.NumberOfScouts++;
+                        user.NumberOfScouts++;
+                        user.NumCurrentScouts++;
+                        user.CurrentScouter = true;
+                    }
+                    else
+                    {
+                        user.NumCurrentScouts++;
                     }
                 }
             }
@@ -323,16 +324,32 @@ namespace MinigameDiscordBot.Entities
             {
                 users.Add(u);
                 u.NumberOfScouts++;
+                u.NumCurrentScouts++;
+                u.CurrentScouter = true;
             }
         }
 
+        //removes a scout from a user
         private void RemoveScoutFromUser(string username)
         {
-            for(int i = 0; i < users.Count; ++i)
+            //loops through al users
+            for (int i = 0; i < users.Count; ++i)
             {
-                if(users[i].Username == username)
+                //if user is found
+                if (users[i].Username == username)
                 {
-                    users[i].NumberOfScouts--;
+                    //if current scouts is greater than 1
+                    if (users[i].NumCurrentScouts > 1)
+                    {
+                        users[i].NumCurrentScouts--;
+                    }
+                    //else reduce current scouts to 0, make the user not a current scouter, and reduce their total scouts
+                    else
+                    {
+                        users[i].NumCurrentScouts = 0;
+                        users[i].CurrentScouter = false;
+                        users[i].NumberOfScouts--;
+                    }
                     break;
                 }
             }
