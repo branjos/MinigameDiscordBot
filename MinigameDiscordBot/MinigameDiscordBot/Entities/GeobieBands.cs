@@ -63,33 +63,41 @@ namespace MinigameDiscordBot.Entities
                 GeobieUser u = new GeobieUser(username);
                 GeobieWorld w = new GeobieWorld(world, username);
 
-                string output = ""; //output
-
-                switch (skill.ToLower())
+                if (!CheckIfWorldIsUsed(w))
                 {
-                    case "a":
-                        AddScoutToUSer(u);
-                        AddWorldToSkill("agil", w);
-                        output = u.Username + " added as a scout.";
-                        break;
-                    case "f":
-                        AddScoutToUSer(u);
-                        AddWorldToSkill("farm", w);
-                        output = u.Username + " added as a scout.";
-                        break;
-                    case "w":
-                        AddScoutToUSer(u);
-                        AddWorldToSkill("hunt", w);
-                        output = u.Username + " added as a scout.";
-                        break;
-                    default:
-                        output = "Incorrect skills.";
-                        break;
+
+                    string output = ""; //output
+
+                    switch (skill.ToLower())
+                    {
+                        case "a":
+                            AddScoutToUSer(u);
+                            AddWorldToSkill("agil", w);
+                            output = u.Username + " added as a scout.";
+                            break;
+                        case "f":
+                            AddScoutToUSer(u);
+                            AddWorldToSkill("farm", w);
+                            output = u.Username + " added as a scout.";
+                            break;
+                        case "w":
+                            AddScoutToUSer(u);
+                            AddWorldToSkill("hunt", w);
+                            output = u.Username + " added as a scout.";
+                            break;
+                        default:
+                            output = "Incorrect skills.";
+                            break;
+                    }
+
+                    LastUpdated = DateTime.Now;
+
+                    return output;
                 }
-
-                LastUpdated = DateTime.Now;
-
-                return output;
+                else
+                {
+                    return "World is already registered.";
+                }
             }
             else
             {
