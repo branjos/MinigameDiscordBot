@@ -44,6 +44,13 @@ namespace MinigamesDiscordBot.CommandModules
             await UpdateTextChannel();
         }
 
+        [Command("RemoveWorld")]
+        public async Task RemoveWorld(int worldNum)
+        {
+            await ReplyAsync(_bands.RemoveWorld(worldNum));
+            await UpdateTextChannel();
+        }
+
 
         private async Task UpdateTextChannel()
         {

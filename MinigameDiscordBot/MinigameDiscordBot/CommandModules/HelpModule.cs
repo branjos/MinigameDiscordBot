@@ -23,6 +23,8 @@ namespace MinigamesDiscordBot.CommandModules
 
             output += "**Geobiebands Commands**\n";
             output += "`_s <world> <a, f, w> <username>` Registers a scout to the proper world and skills.\n";
+            output += "`_Dead <world>` Make a world dead.\n";
+            output += "`_RemoveWorld <world>` Removes a world from the list.\n";
             output += "`_ClearInfo` Clears the current geobiebands info.\n";
 
             await ReplyAsync(output);
