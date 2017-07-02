@@ -43,7 +43,7 @@ namespace MinigameDiscordBot.Entities
 
                 //set up user to compare to the list
                 GeobieUser u = new GeobieUser(username);
-                GeobieWorld w = new GeobieWorld(world);
+                GeobieWorld w = new GeobieWorld(world, username);
 
                 string output = ""; //output
 
@@ -55,7 +55,7 @@ namespace MinigameDiscordBot.Entities
                         {
                             currentScouters.Add(u.Username);
                         }
-                        AddWorldToSkill("agil", world);
+                        AddWorldToSkill("agil", w);
                         output = u.Username + " added as a scout.";
                         break;
                     case "f":
@@ -64,7 +64,7 @@ namespace MinigameDiscordBot.Entities
                         {
                             currentScouters.Add(u.Username);
                         }
-                        AddWorldToSkill("farm", world);
+                        AddWorldToSkill("farm", w);
                         output = u.Username + " added as a scout.";
                         break;
                     case "w":
@@ -73,7 +73,7 @@ namespace MinigameDiscordBot.Entities
                         {
                             currentScouters.Add(u.Username);
                         }
-                        AddWorldToSkill("hunt", world);
+                        AddWorldToSkill("hunt", w);
                         output = u.Username + " added as a scout.";
                         break;
                     default:
@@ -245,14 +245,44 @@ namespace MinigameDiscordBot.Entities
 
             if (skill1.Contains(w))
             {
+                for(int i = 0; i < skill1.Count; ++i)
+                {
+                    if (w.Equals(skill1[i]))
+                    {
+                        if (currentScouters.Contains(skill1[i].ScoutName))
+                        {
+                            currentScouters.Remove(skill1[i].ScoutName);
+                        }
+                    }
+                }
                 skill1.Remove(w);
             }
             else if (skill2.Contains(w))
             {
+                for (int i = 0; i < skill2.Count; ++i)
+                {
+                    if (w.Equals(skill2[i]))
+                    {
+                        if (currentScouters.Contains(skill2[i].ScoutName))
+                        {
+                            currentScouters.Remove(skill2[i].ScoutName);
+                        }
+                    }
+                }
                 skill2.Remove(w);
             }
             else if (skill3.Contains(w))
             {
+                for (int i = 0; i < skill3.Count; ++i)
+                {
+                    if (w.Equals(skill3[i]))
+                    {
+                        if (currentScouters.Contains(skill3[i].ScoutName))
+                        {
+                            currentScouters.Remove(skill3[i].ScoutName);
+                        }
+                    }
+                }
                 skill3.Remove(w);
             }
             else
@@ -296,30 +326,39 @@ namespace MinigameDiscordBot.Entities
             }
         }
 
+        private void RemoveScoutFromUser(string username)
+        {
+            for(int i = 0; i < users.Count; ++i)
+            {
+                if(users[i].Username == username)
+                {
+                    users[i].NumberOfScouts--;
+                    break;
+                }
+            }
+        }
+
         //adds a world number to a skill set
-        private void AddWorldToSkill(string skill, int world)
+        private void AddWorldToSkill(string skill, GeobieWorld world)
         {
             switch (skill)
             {
                 case "agil":
-                    GeobieWorld w = new GeobieWorld(world);
-                    if (!CheckIfWorldIsUsed(w))
+                    if (!CheckIfWorldIsUsed(world))
                     {
-                        skill1.Add(w);
+                        skill1.Add(world);
                     }                   
                     break;
                 case "farm":
-                    GeobieWorld x = new GeobieWorld(world);
-                    if (!CheckIfWorldIsUsed(x))
+                    if (!CheckIfWorldIsUsed(world))
                     {
-                        skill2.Add(x);
+                        skill2.Add(world);
                     }
                     break;
                 case "hunt":
-                    GeobieWorld y = new GeobieWorld(world);
-                    if (!CheckIfWorldIsUsed(y))
+                    if (!CheckIfWorldIsUsed(world))
                     {
-                        skill3.Add(y);
+                        skill3.Add(world);
                     }
                     break;
             }
