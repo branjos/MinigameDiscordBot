@@ -201,9 +201,18 @@ namespace MinigameDiscordBot.Entities
             output += "**Scouters** \n";
             for(int i = 0; i < users.Count; ++i)
             {
-                if (users[i].CurrentScouter)
+                if (users[i].CurrentScouter && users[i].NumCurrentScouts <= 1) 
                 {
                     output += users[i].Username + "\n";
+                }
+                else if(users[i].CurrentScouter && users[i].NumCurrentScouts > 1)
+                {
+                    output += users[i].Username;
+                    for(int j = 1; j < users[i].NumCurrentScouts; j++)
+                    {
+                        output += "*";
+                    }
+                    output += "\n";
                 }
             }
 
