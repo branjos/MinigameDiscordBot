@@ -47,7 +47,7 @@ namespace MinigamesDiscordBot.CommandModules
             output += "RSN: Branjos\n\n";
 
             output += "**Report a bug or request an enhancement**\n";
-            output += "Please file an issue here: https://github.com/branjos/MinigameDiscordBot/issues \n\n";
+            output += "Please shout out to me using @bot dev\n\n";
         }
     }
 }
