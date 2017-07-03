@@ -12,6 +12,8 @@ namespace MinigamesDiscordBot
         public static ulong CWS_CHANNEL = 0; //output channel for cws
         public static ulong GEOBIE_CHANNEL = 0; //output for geobiebands
 
+        public static string FILEPATH = "C:\\Minigames\\";
+
         //read the contents of config.txt
         public static void GetConfigInfo()
         {

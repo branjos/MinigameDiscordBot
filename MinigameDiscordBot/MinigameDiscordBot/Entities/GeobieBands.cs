@@ -1,6 +1,8 @@
 ﻿using MinigameDiscordBot.Util;
+using MinigamesDiscordBot;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace MinigameDiscordBot.Entities
 {
@@ -376,11 +378,12 @@ namespace MinigameDiscordBot.Entities
             {
                 foreach (GeobieUser user in users)
                 {
-                    if (u.Username == user.Username && !user.CurrentScouter)
+                    if (u.Username.ToLower() == user.Username.ToLower() && !user.CurrentScouter)
                     {
                         user.NumberOfScouts++;
                         user.NumCurrentScouts++;
                         user.CurrentScouter = true;
+                        WriteToFile();
                     }
                     else
                     {
@@ -394,13 +397,14 @@ namespace MinigameDiscordBot.Entities
                 u.NumberOfScouts++;
                 u.NumCurrentScouts++;
                 u.CurrentScouter = true;
+                WriteToFile();
             }
         }
 
         //removes a scout from a user
         private void RemoveScoutFromUser(string username)
         {
-            //loops through al users
+            //loops through all users
             for (int i = 0; i < users.Count; ++i)
             {
                 //if user is found
@@ -417,6 +421,7 @@ namespace MinigameDiscordBot.Entities
                         users[i].NumCurrentScouts = 0;
                         users[i].CurrentScouter = false;
                         users[i].NumberOfScouts--;
+                        WriteToFile();
                     }
                     break;
                 }
@@ -489,15 +494,45 @@ namespace MinigameDiscordBot.Entities
         }
 
 
-
+        //writes GeobieUser data to a file
         private void WriteToFile()
         {
+            string filepath = Config.FILEPATH + "\\Geobie\\Users.txt";
 
+            var file = File.Create(filepath);
+            StreamWriter sr = new StreamWriter(file);
+
+            for(int i = 0; i < users.Count; ++i)
+            {
+                sr.WriteLine(users[i].Username + "," + users[i].NumberOfScouts);
+            }
+
+            sr.Dispose();
+            file.Dispose();
         }
 
+        //reads geobie user data from file on startup
         private void ReadFromFile()
         {
+            string filepath = Config.FILEPATH + "\\Geobie\\Users.txt";
 
+            var file = File.OpenRead(filepath);
+            StreamReader sr = new StreamReader(file);
+
+            string line = "";
+
+            while((line = sr.ReadLine()) != null)
+            {
+                string[] values = line.Split(',');
+
+                GeobieUser u = new GeobieUser(values[0]);
+                u.NumberOfScouts = Convert.ToInt32(values[1]);
+
+                users.Add(u);
+            }
+
+            sr.Dispose();
+            file.Dispose();
         }
     }
 }

@@ -14,12 +14,14 @@ namespace MinigameDiscordBot.Entities
         {
             Username = username;
             NumberOfScouts = 0;
+            CurrentScouter = false;
+            NumCurrentScouts = 0;
         }
 
         public bool Equals(GeobieUser other)
         {
             if (other == null) { return false; }
-            if (other.Username == Username) { return true; }
+            if (other.Username.ToLower() == Username.ToLower()) { return true; }
             else { return false; }
         }
 
