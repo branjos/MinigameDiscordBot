@@ -47,10 +47,14 @@ namespace MinigamesDiscordBot.CommandModules
             output += "RSN: Branjos\n\n";
 
             output += "**Contributors:**\n";
-            output += "RSN: \n";
+            output += "RSN: Minigames\n";
+            output += "RSN: Bepo\n";
+            output += "RSN: xMiley\n";
 
             output += "**Report a bug or request an enhancement**\n";
             output += "Please shout out to me using @bot dev\n\n";
+
+            await ReplyAsync(output);
         }
     }
 }
