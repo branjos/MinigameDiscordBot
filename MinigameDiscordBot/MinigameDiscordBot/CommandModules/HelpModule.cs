@@ -31,5 +31,23 @@ namespace MinigamesDiscordBot.CommandModules
 
             await ReplyAsync(output);
         }
+
+        [Command("About")]
+        public async Task About()
+        {
+            string output = "**Minigames FC Discord Bot** \n\n";
+            output += "This bot is built to help maintain the Minigames FC and its information.\n\n";
+
+            output += "**Notable Features**\n";
+            output += "-Geobiebands tracking and user management\n";
+            output += "-Castlewars tracking \n";
+            output += "-FC management \n\n";
+
+            output += "**Contributors:**\n";
+            output += "RSN: Branjos\n\n";
+
+            output += "**Report a bug or request an enhancement**\n";
+            output += "Please file an issue here: https://github.com/branjos/MinigameDiscordBot/issues \n\n";
+        }
     }
 }

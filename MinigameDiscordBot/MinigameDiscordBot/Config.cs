@@ -6,6 +6,7 @@ namespace MinigamesDiscordBot
 {
     class Config
     {
+        public static string VERSION = "1.0.0";
         public static string BOT_TOKEN = ""; //bot's token
         public static ulong SERVER_ID = 0; //servers unique id
         public static ulong CWS_CHANNEL = 0; //output channel for cws
