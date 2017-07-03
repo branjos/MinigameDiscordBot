@@ -65,34 +65,40 @@ namespace MinigameDiscordBot.Entities
 
                 if (!CheckIfWorldIsUsed(w))
                 {
-
-                    string output = ""; //output
-
-                    switch (skill.ToLower())
+                    if (!w.IsFreeWorld)
                     {
-                        case "a":
-                            AddScoutToUSer(u);
-                            AddWorldToSkill("agil", w);
-                            output = u.Username + " added as a scout.";
-                            break;
-                        case "f":
-                            AddScoutToUSer(u);
-                            AddWorldToSkill("farm", w);
-                            output = u.Username + " added as a scout.";
-                            break;
-                        case "w":
-                            AddScoutToUSer(u);
-                            AddWorldToSkill("hunt", w);
-                            output = u.Username + " added as a scout.";
-                            break;
-                        default:
-                            output = "Incorrect skills.";
-                            break;
+                        string output = ""; //output
+
+                        switch (skill.ToLower())
+                        {
+                            case "a":
+                                AddScoutToUSer(u);
+                                AddWorldToSkill("agil", w);
+                                output = u.Username + " added as a scout.";
+                                break;
+                            case "f":
+                                AddScoutToUSer(u);
+                                AddWorldToSkill("farm", w);
+                                output = u.Username + " added as a scout.";
+                                break;
+                            case "w":
+                                AddScoutToUSer(u);
+                                AddWorldToSkill("hunt", w);
+                                output = u.Username + " added as a scout.";
+                                break;
+                            default:
+                                output = "Incorrect skills.";
+                                break;
+                        }
+
+                        LastUpdated = DateTime.Now;
+
+                        return output;
                     }
-
-                    LastUpdated = DateTime.Now;
-
-                    return output;
+                    else
+                    {
+                        return "That world is not availble.";
+                    }
                 }
                 else
                 {

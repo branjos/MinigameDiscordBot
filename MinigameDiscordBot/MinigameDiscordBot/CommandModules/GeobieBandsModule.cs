@@ -21,15 +21,85 @@ namespace MinigamesDiscordBot.CommandModules
         [Command("s")]
         public async Task Scout(int world, string skill, [Remainder]string username)
         {
-            await ReplyAsync(_bands.AddWorld(username, world, skill));
-            await UpdateTextChannel();
+            //getting the user on the server to see their roles
+            SocketGuild s = _client.GetGuild(Config.SERVER_ID);
+            SocketGuildUser u = s.GetUser(Context.User.Id);
+
+            bool roleFound = false; //to output correct message
+
+            //loopsing through roles to see if they have the correct one
+            foreach (SocketRole role in u.Roles)
+            {
+                if(role.Name == "Geobies" || role.Name == "Goobies" || s.Owner.Id == Context.User.Id)
+                {
+                    roleFound = true;
+                }
+            }
+            if (roleFound)
+            {
+                await ReplyAsync(_bands.AddWorld(username, world, skill));
+                await UpdateTextChannel();
+            }
+            else
+            {
+                await ReplyAsync("You do not have permission to use this!");
+            }
+                
         }
 
         [Command("ClearInfo")]
         public async Task PrintScouts()
         {
-            await ReplyAsync(_bands.ClearInfo());
-            await UpdateTextChannel();
+            //getting the user on the server to see their roles
+            SocketGuild s = _client.GetGuild(Config.SERVER_ID);
+            SocketGuildUser u = s.GetUser(Context.User.Id);
+
+            bool roleFound = false; //to output correct message
+
+            //loopsing through roles to see if they have the correct one
+            foreach (SocketRole role in u.Roles)
+            {
+                if (role.Name == "Geobies" || role.Name == "Goobies" || s.Owner.Id == Context.User.Id)
+                {
+                    roleFound = true;
+                }
+            }
+            if (roleFound)
+            {
+                await ReplyAsync(_bands.ClearInfo());
+                await UpdateTextChannel();
+            }
+            else
+            {
+                await ReplyAsync("You do not have permission to use this!");
+            }           
+        }
+
+        [Command("ClearInfoMonthly")]
+        public async Task ClearInfoMonthly()
+        {
+            //getting the user on the server to see their roles
+            SocketGuild s = _client.GetGuild(Config.SERVER_ID);
+            SocketGuildUser u = s.GetUser(Context.User.Id);
+
+            bool roleFound = false; //to output correct message
+
+            //loopsing through roles to see if they have the correct one
+            foreach (SocketRole role in u.Roles)
+            {
+                if (role.Name == "Geobies" || role.Name == "Goobies" || s.Owner.Id == Context.User.Id)
+                {
+                    roleFound = true;
+                }
+            }
+            if (roleFound)
+            {
+                await ReplyAsync(_bands.ClearInfoMonthly());
+            }
+            else
+            {
+                await ReplyAsync("You do not have permission to use this!");
+            }
         }
 
         [Command("Refresh")]
@@ -41,25 +111,87 @@ namespace MinigamesDiscordBot.CommandModules
         [Command("Dead")]
         public async Task MarkWorldAsDead(int world)
         {
-            await ReplyAsync(_bands.MarkAsDead(world));
-            await UpdateTextChannel();
+            //getting the user on the server to see their roles
+            SocketGuild s = _client.GetGuild(Config.SERVER_ID);
+            SocketGuildUser u = s.GetUser(Context.User.Id);
+
+            bool roleFound = false; //to output correct message
+
+            //loopsing through roles to see if they have the correct one
+            foreach (SocketRole role in u.Roles)
+            {
+                if (role.Name == "Geobies" || role.Name == "Goobies" || s.Owner.Id == Context.User.Id)
+                {
+                    roleFound = true;
+                }
+            }
+            if (roleFound)
+            {
+                await ReplyAsync(_bands.MarkAsDead(world));
+                await UpdateTextChannel();
+            }
+            else
+            {
+                await ReplyAsync("You do not have permission to use this!");
+            }
         }
 
         [Command("RemoveWorld")]
         public async Task RemoveWorld(int worldNum)
         {
-            await ReplyAsync(_bands.RemoveWorld(worldNum));
-            await UpdateTextChannel();
+            //getting the user on the server to see their roles
+            SocketGuild s = _client.GetGuild(Config.SERVER_ID);
+            SocketGuildUser u = s.GetUser(Context.User.Id);
+
+            bool roleFound = false; //to output correct message
+
+            //loopsing through roles to see if they have the correct one
+            foreach (SocketRole role in u.Roles)
+            {
+                if (role.Name == "Geobies" || role.Name == "Goobies" || s.Owner.Id == Context.User.Id)
+                {
+                    roleFound = true;
+                }
+            }
+            if (roleFound)
+            {
+                await ReplyAsync(_bands.RemoveWorld(worldNum));
+                await UpdateTextChannel();
+            }
+            else
+            {
+                await ReplyAsync("You do not have permission to use this!");
+            }
         }
 
         [Command("OutputTotals")]
         public async Task OutputMonthlyTotals()
         {
-            List<string> output = _bands.OutputTotalScouts();
+            //getting the user on the server to see their roles
+            SocketGuild s = _client.GetGuild(Config.SERVER_ID);
+            SocketGuildUser u = s.GetUser(Context.User.Id);
 
-            for(int i = 0; i < output.Count; ++i)
+            bool roleFound = false; //to output correct message
+
+            //loopsing through roles to see if they have the correct one
+            foreach (SocketRole role in u.Roles)
             {
-                await ReplyAsync(output[i]);
+                if (role.Name == "Geobies" || role.Name == "Goobies" || s.Owner.Id == Context.User.Id)
+                {
+                    roleFound = true;
+                }
+            }
+            if (roleFound)
+            {
+                List<string> output = _bands.OutputTotalScouts();
+                for (int i = 0; i < output.Count; ++i)
+                {
+                    await ReplyAsync(output[i]);
+                }
+            }
+            else
+            {
+                await ReplyAsync("You do not have permission to use this!");
             }
         }
 
