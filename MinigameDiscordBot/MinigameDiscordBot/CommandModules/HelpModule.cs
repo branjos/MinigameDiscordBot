@@ -43,8 +43,11 @@ namespace MinigamesDiscordBot.CommandModules
             output += "-Castlewars tracking \n";
             output += "-FC management \n\n";
 
-            output += "**Contributors:**\n";
+            output += "**Bot Deeloper:** \n";
             output += "RSN: Branjos\n\n";
+
+            output += "**Contributors:**\n";
+            output += "RSN: \n";
 
             output += "**Report a bug or request an enhancement**\n";
             output += "Please shout out to me using @bot dev\n\n";
