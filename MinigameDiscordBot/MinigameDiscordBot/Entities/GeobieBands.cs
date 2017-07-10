@@ -358,6 +358,66 @@ namespace MinigameDiscordBot.Entities
             return output;
         }
 
+        //the output for text files. Will mark line separators with a ;
+        public string OutputForTextFile()
+        {
+            string output = "";
+            output += skills[0] + ": ";
+            for (int i = 0; i < skill1.Count; ++i)
+            {
+                if (i == 0)
+                {
+                    output += skill1[i];
+                }
+                else
+                {
+                    output += ", " + skill1[i];
+                }
+            }
+
+            output += ";";
+
+            output += skills[1];
+
+            for (int i = 0; i < skill2.Count; ++i)
+            {
+                if (i == 0)
+                {
+                    output += skill2[i];
+                }
+                else
+                {
+                    output += ", " + skill2[i];
+                }
+            }
+
+            output += ";";
+
+            output += skills[2];
+
+            for (int i = 0; i < skill3.Count; ++i)
+            {
+                if (i == 0)
+                {
+                    output += skill3[i];
+                }
+                else
+                {
+                    output += ", " + skill3[i];
+                }
+            }
+
+            output += ";Scouters: ;";
+
+            for(int i = 0; i < users.Count; ++i)
+            {
+                output += users[i].Username + ";";
+            }
+
+            return output;
+
+        }
+
         //check if user is on the list
         private bool IsUserRegistered(GeobieUser user)
         {

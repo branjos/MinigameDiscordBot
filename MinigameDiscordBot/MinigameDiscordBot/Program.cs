@@ -3,6 +3,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using MinigameDiscordBot.Entities;
+using MinigameDiscordBot.Timers;
 using MinigamesDiscordBot.CommandModules;
 using MinigamesDiscordBot.Entities;
 using System;
@@ -96,6 +97,7 @@ namespace MinigamesDiscordBot
             _map.AddSingleton(new GeobieBands());
             _map.AddSingleton(_client);
 
+
             // When all your required services are in the collection, build the container.
             _services = _map.BuildServiceProvider();
 
@@ -104,6 +106,8 @@ namespace MinigamesDiscordBot
             await _commands.AddModuleAsync<GeobieBandsModule>();
             await _commands.AddModuleAsync<HelpModule>();
 
+            //add timers
+            TimerContainer timers = new TimerContainer(_services);
 
             // Subscribe a handler to see if a message invokes a command.
             _client.MessageReceived += HandleCommandAsync;
