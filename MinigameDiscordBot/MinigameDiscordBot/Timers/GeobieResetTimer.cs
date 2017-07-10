@@ -23,7 +23,7 @@ namespace MinigameDiscordBot.Timers
         {
             _bands = bands;
             _client = client;
-            Console.WriteLine("Timer started.");
+            //Console.WriteLine("Timer started.");
             StartTimer();
         }
 
@@ -66,18 +66,35 @@ namespace MinigameDiscordBot.Timers
         //gets the time until next geobiebands
         private TimeSpan GetTimeToNextGeobie()
         {
-            DateTime first = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 7, 30, 0);
-            DateTime second = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 19, 30, 0);
+            var britTimeZone = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
 
-            if (DateTime.Now < first)
+            DateTime nowInUTC = TimeZoneInfo.ConvertTime(DateTime.Now, britTimeZone);
+            DateTime first;
+
+            if(nowInUTC > new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day - 1, 23, 30, 0))
             {
-                Console.WriteLine("Now is < first by: " + (first - DateTime.Now).ToString());
-                return first - DateTime.Now;
+                first = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 30, 0);
             }
             else
             {
-                Console.WriteLine("Now is > first by: " + (second - DateTime.Now).ToString());
-                return second - DateTime.Now;
+                first = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day - 1, 23, 30, 0);
+            }
+
+            DateTime second = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 11, 30, 0);
+
+            if (nowInUTC < first)
+            {
+                //Console.WriteLine("Now is < first by: " + (first - nowInUTC).ToString());
+                return first - nowInUTC;
+            }
+            else if (nowInUTC < second && nowInUTC > first)
+            {
+                //Console.WriteLine("Now is > first by: " + (second - nowInUTC).ToString());
+                return second - nowInUTC;
+            }
+            else
+            {
+                return first - nowInUTC;
             }
         }
 
