@@ -218,7 +218,7 @@ namespace MinigameDiscordBot.Entities
                     output += users[i].Username;
                     for(int j = 1; j < users[i].NumCurrentScouts; j++)
                     {
-                        output += "*";
+                        output += "+";
                     }
                     output += "\n";
                 }
@@ -445,7 +445,7 @@ namespace MinigameDiscordBot.Entities
                         user.CurrentScouter = true;
                         WriteToFile();
                     }
-                    else
+                    else if (u.Username.ToLower() == user.Username.ToLower())
                     {
                         user.NumCurrentScouts++;
                     }
