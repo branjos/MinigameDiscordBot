@@ -124,7 +124,7 @@ namespace MinigamesDiscordBot
 
             // Replace the '!' with whatever character
             // you want to prefix your commands with.
-            if (msg.HasCharPrefix('_', ref pos))
+            if (msg.HasCharPrefix('-', ref pos))
             {
                 // Create a Command Context.
                 var context = new SocketCommandContext(_client, msg);
