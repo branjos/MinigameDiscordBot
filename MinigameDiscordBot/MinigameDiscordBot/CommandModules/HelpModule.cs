@@ -15,6 +15,7 @@ namespace MinigamesDiscordBot.CommandModules
 
             output += "**Coordination Commands**\n";
             output += "`_StartGames` Starts games of Castle Wars\n";
+            output += "`_ChangeCoord <user#1111>` Changes the coordinator of the game.\n";
             output += "`_AddP <sara, zam> <username>` Adds a perm member to either team.\n";
             output += "`_AddR <username>` Adds a rotating member to available team.\n";
             output += "`_Remove <username>` Removes a user from the games.\n";

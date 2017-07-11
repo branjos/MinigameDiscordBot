@@ -145,6 +145,40 @@ namespace MinigamesDiscordBot.CommandModules
                 await ReplyAsync("You are not the game coordinator or a server owner.");
             }
         }
+
+        [Command("ChangeCoord")]
+        public async Task ChangeCoordinator(string user)
+        {
+            bool found = false;
+
+            if (_game.GameController == Context.User.ToString() || Context.Guild.OwnerId == Context.User.Id)
+            {
+                SocketGuild server = _client.GetGuild(Config.SERVER_ID);
+                SocketTextChannel channel = server.GetTextChannel(Context.Channel.Id);
+
+                foreach (SocketGuildUser u in channel.Users)
+                {
+                    if(u.ToString() == user)
+                    {
+                        _game.GameController = user;
+                        found = true;                       
+                        break;
+                    }
+                }
+                if (found)
+                {
+                    await ReplyAsync("Game controller is now: " + user);
+                }
+                else
+                {
+                    await ReplyAsync("There is no user in this channel with the name: " + user);
+                }
+            }
+            else
+            {
+                await ReplyAsync("You are not the game coordinator or a server owner.");
+            }
+        }
         
         private async Task UpdateTextChannel()
         {
