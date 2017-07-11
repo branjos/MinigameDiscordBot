@@ -171,16 +171,22 @@ namespace MinigamesDiscordBot.Entities
 
         private void EvenOutSides()
         {
+            if(CheckIfTeamIsPerm("z") || CheckIfTeamIsPerm("s"))
             //we want sara to be the heavier team, so if sara team has 2 more members than zam, we need to move one
             if (saradominTeam.Count > zamorakTeam.Count + 1) 
             {
-                int numberToMove = saradominTeam.Count - zamorakTeam.Count + 1;
+                int numberToMove = saradominTeam.Count - zamorakTeam.Count;
 
                 //move the users with the most wins until the numbertomove is 0;
                 while (numberToMove > 0)
                 {
-                    int mostWins = 0; 
-                
+                    int mostWins = 0;
+
+                    if (CheckIfTeamIsPerm("s"))
+                    {
+                        break;
+                    }
+                    
                     //check to see the most consecutive wins
                     foreach(CwsUser u in saradominTeam)
                     {
@@ -210,14 +216,19 @@ namespace MinigamesDiscordBot.Entities
             //if zamorak team has more members than sara
             else if (saradominTeam.Count < zamorakTeam.Count)
             {
-                int numberToMove = zamorakTeam.Count - saradominTeam.Count;
+                int numberToMove = zamorakTeam.Count - saradominTeam.Count + 1;
 
                 //move the users with the most wins until the numbertomove is 0;
                 while (numberToMove > 0)
                 {
                     int leastWins = 0;
 
-                    //check to see the most consecutive wins
+                    if (CheckIfTeamIsPerm("z"))
+                    {
+                        break;
+                    }
+
+                        //check to see the most consecutive wins
                     foreach (CwsUser u in zamorakTeam)
                     {
                         if (u.ConsecutiveWins < leastWins && !CheckIfPerm(u))
@@ -308,6 +319,34 @@ namespace MinigamesDiscordBot.Entities
             {
                 return false;
             }
+        }
+
+        private bool CheckIfTeamIsPerm(string side)
+        {
+            bool perms = true;
+
+            if (side == "z")
+            {
+                for (int i = 0; i < zamorakTeam.Count; ++i)
+                {
+                    if (!CheckIfPerm(zamorakTeam[i]))
+                    {
+                        perms = false;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < saradominTeam.Count; ++i)
+                {
+                    if (!CheckIfPerm(saradominTeam[i]))
+                    {
+                        perms = false;
+                    }
+                }
+            }
+
+            return perms;
         }
     }
 }
