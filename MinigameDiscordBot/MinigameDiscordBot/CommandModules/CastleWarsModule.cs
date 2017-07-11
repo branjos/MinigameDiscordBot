@@ -65,28 +65,39 @@ namespace MinigamesDiscordBot.CommandModules
         [Command("AddP")]
         public async Task AddPerm(string side, [Remainder]string username)
         {
-            string output = "You are not the game coordinator or a server owner.";
+            string[] users = username.Split(',');
 
-            if (_game.GameController == Context.User.ToString() || Context.Guild.OwnerId == Context.User.Id)
+            foreach (string u in users)
             {
-                output = _game.AddPerm(username.ToLower(), side);
-                await UpdateTextChannel();
+                string output = "You are not the game coordinator or a server owner.";
+
+                if (_game.GameController == Context.User.ToString() || Context.Guild.OwnerId == Context.User.Id)
+                {
+                    output = _game.AddPerm(u.ToLower(), side);
+                    await UpdateTextChannel();
+                }
+
+                await ReplyAsync(output);          
             }
-            
-            await ReplyAsync(output);         
         }
 
         [Command("AddR")] //for add rotations
         public async Task AddRotarions([Remainder]string username)
         {
-            string output = "You are not the game coordinator or a server owner.";
+            string[] users = username.Split(',');
 
-            if (_game.GameController == Context.User.ToString() || Context.Guild.OwnerId == Context.User.Id)
+            foreach (string u in users)
             {
-                output = _game.AddRotating(username);
-                await UpdateTextChannel();
+
+                string output = "You are not the game coordinator or a server owner.";
+
+                if (_game.GameController == Context.User.ToString() || Context.Guild.OwnerId == Context.User.Id)
+                {
+                    output = _game.AddRotating(u);
+                    await UpdateTextChannel();
+                }
+                await ReplyAsync(output);
             }
-            await ReplyAsync(output);
         }
 
         [Command("Remove")]

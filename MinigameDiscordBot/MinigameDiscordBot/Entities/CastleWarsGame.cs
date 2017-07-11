@@ -24,17 +24,18 @@ namespace MinigamesDiscordBot.Entities
         //adds the user as a perm to a team
         public string AddPerm(string user, string side)
         {
+          
             CwsUser u = new CwsUser(user);
             CwsUser u2 = new CwsUser(user + "*");
             if (!saradominTeam.Contains(u) && !zamorakTeam.Contains(u) && !saradominTeam.Contains(u2) && 
                 !zamorakTeam.Contains(u2))
             {
-                if (side == "sara")
+                if (side == "s")
                 {
                     saradominTeam.Add(u2);
                     return u.Username + " has been added as a perm to the Saradomin team.";
                 }
-                else if (side == "zam")
+                else if (side == "z")
                 {
                     zamorakTeam.Add(u2);
                     return u.Username + " has been added as a perm to the Zamorak team.";
