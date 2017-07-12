@@ -14,12 +14,23 @@ namespace MinigamesDiscordBot.CommandModules
         CastleWarsGame _game;
         DiscordSocketClient _client;
 
+        string help = "";
+
         //constructor - when the object is created this is called
         public CastleWarsModule(DiscordSocketClient client, CastleWarsGame game)
         {
             //pulls needed info from the serviceCollection in the main program
             _game = game;
             _client = client;
+
+            help += "**Coordination Commands**\n";
+            help += "`_StartGames` Starts games of Castle Wars\n";
+            help += "`_ChangeCoord <user#1111>` Changes the coordinator of the game.\n";
+            help += "`_AddP <s, z> <username>` Adds a perm member to either team.\n";
+            help += "`_AddR <username>` Adds a rotating member to available team.\n";
+            help += "`_Remove <username>` Removes a user from the games.\n";
+            help += "`_NewRound` Use this at the start of each round to switch teams.\n";
+            help += "`_StopGames` This closes the games.\n";
         }
 
 
@@ -201,6 +212,7 @@ namespace MinigamesDiscordBot.CommandModules
             await channel.DeleteMessagesAsync(messages);
 
             //give output
+            await channel.SendMessageAsync(help);
             await channel.SendMessageAsync(_game.OutputTable());
         }
     }
