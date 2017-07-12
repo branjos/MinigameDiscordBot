@@ -21,7 +21,7 @@ namespace MinigameDiscordBot.Util
         private void WriteInfoToFile()
         {
             DateTime now = DateTime.Now;
-            string path = Config.FILEPATH + "Outputs\\" + now.Month + now.Day + "." + _iteration;
+            string path = Config.FILEPATH + "Outputs\\" + now.Month + now.Day + "-" + _iteration + ".txt";
 
             var file = File.Create(path);
             var sw = new StreamWriter(file);
