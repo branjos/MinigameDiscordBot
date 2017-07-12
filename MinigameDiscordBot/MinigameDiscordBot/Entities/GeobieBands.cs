@@ -60,7 +60,7 @@ namespace MinigameDiscordBot.Entities
         public string AddWorld(string username, int world, string skill)
         {
 
-            if (world > 0 && world <= 138)
+            if (world > 0 && world <= 140)
             {
 
                 //set up user to compare to the list
