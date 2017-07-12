@@ -175,9 +175,9 @@ namespace MinigamesDiscordBot.CommandModules
             bool isAdmin = false;
 
             SocketGuild server = _client.GetGuild(Config.SERVER_ID);
-            SocketGuildUser u = server.GetUser(Context.User.Id);
+            SocketGuildUser us = server.GetUser(Context.User.Id);
 
-            foreach (SocketRole role in u.Roles)
+            foreach (SocketRole role in us.Roles)
             {
                 if(role.Name == "Admin")
                 {
