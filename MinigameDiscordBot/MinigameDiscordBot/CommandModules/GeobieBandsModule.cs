@@ -21,9 +21,6 @@ namespace MinigamesDiscordBot.CommandModules
             help += "`_s <world> <a, f, w> <username>` Registers a scout to the proper world and skills.\n";
             help += "`_Dead <world>` Make a world dead.\n";
             help += "`_RemoveWorld <world>` Removes a world from the list.\n";
-            help += "`_ClearInfo` Clears the current geobiebands info.\n";
-            help += "`_OutputTotals` Prints out total number of scouts per user.\n";
-            help += "`_ClearInfoMonthly` Clears user total scouts for the month.\n";
         }
 
         [Command("s")]
