@@ -49,10 +49,8 @@ namespace MinigameDiscordBot.Entities
         //clears all of the users total caps 
         public string ClearInfoMonthly()
         {
-            for(int i = 0; i < users.Count; ++i)
-            {
-                users[i].NumberOfScouts = 0;
-            }
+            users.Clear();
+            WriteToFile();
             return "Info cleared monthly.";
         }
 
