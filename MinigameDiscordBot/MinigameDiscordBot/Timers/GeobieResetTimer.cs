@@ -1,9 +1,9 @@
 ﻿using Discord;
 using Discord.WebSocket;
 using MinigameDiscordBot.Entities;
+using MinigameDiscordBot.Util;
 using MinigamesDiscordBot;
 using System;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -50,7 +50,7 @@ namespace MinigameDiscordBot.Timers
         //updates all info
         private async void DoUpdateAsync()
         {
-            WriteInfoToFile();
+            GeobieOutputFileWriter file = new GeobieOutputFileWriter(_bands.OutputForTextFile(), dailyIteration);
             _bands.ClearInfo();
             await UpdateTextChannel();
             if (dailyIteration >= 2)
@@ -96,26 +96,7 @@ namespace MinigameDiscordBot.Timers
             {
                 return first - nowInUTC;
             }
-        }
-
-        //writes the data to the file
-        private void WriteInfoToFile()
-        {
-            DateTime now = DateTime.Now;
-            string path = Config.FILEPATH + "Outputs\\" + now.Month + now.Day + "." + dailyIteration;
-
-            var file = File.Create(path);
-            var sw = new StreamWriter(file);
-
-            string output = _bands.OutputForTextFile();
-
-            string[] csv = output.Split(';');
-
-            for(int i = 0; i < csv.Length; ++i)
-            {
-                sw.WriteLine(csv[i]);
-            }
-        }
+        }       
 
         //updates the text channel
         private async Task UpdateTextChannel()

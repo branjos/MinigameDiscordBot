@@ -26,7 +26,9 @@ namespace MinigameDiscordBot.Entities
         //clears the info from all areas
         public string ClearInfo()
         {
-            for(int i = 0; i < worlds.Length; ++i)
+            GeobieOutputFileWriter f = new GeobieOutputFileWriter(OutputForTextFile(), 0);
+
+            for (int i = 0; i < worlds.Length; ++i)
             {
                 worlds[i] = "";
             }
