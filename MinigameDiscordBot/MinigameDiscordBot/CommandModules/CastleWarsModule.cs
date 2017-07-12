@@ -172,10 +172,22 @@ namespace MinigamesDiscordBot.CommandModules
         public async Task ChangeCoordinator(string user)
         {
             bool found = false;
+            bool isAdmin = false;
 
-            if (_game.GameController == Context.User.ToString() || Context.Guild.OwnerId == Context.User.Id)
+            SocketGuild server = _client.GetGuild(Config.SERVER_ID);
+            SocketGuildUser u = server.GetUser(Context.User.Id);
+
+            foreach (SocketRole role in u.Roles)
             {
-                SocketGuild server = _client.GetGuild(Config.SERVER_ID);
+                if(role.Name == "Admin")
+                {
+                    isAdmin = true;
+                }
+            }
+
+            if (_game.GameController == Context.User.ToString() || Context.Guild.OwnerId == Context.User.Id ||
+                isAdmin)
+            {
                 SocketTextChannel channel = server.GetTextChannel(Context.Channel.Id);
 
                 foreach (SocketGuildUser u in channel.Users)
