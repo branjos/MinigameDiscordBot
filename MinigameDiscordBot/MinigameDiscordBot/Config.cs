@@ -8,9 +8,12 @@ namespace MinigamesDiscordBot
     {
         public static string VERSION = "1.0.0";
         public static string BOT_TOKEN = ""; //bot's token
-        public static ulong SERVER_ID = 0; //servers unique id
-        public static ulong CWS_CHANNEL = 0; //output channel for cws
-        public static ulong GEOBIE_CHANNEL = 0; //output for geobiebands
+        public static ulong SERVER_ID_MINIGAMES = 0; //servers unique id
+        public static ulong SERVER_ID_WARBANDS = 0;
+        public static ulong MINIGAMES_CWS_CHANNEL = 0; //output channel for cws
+        public static ulong MINIGAMES_GEOBIE_CHANNEL = 0; //output for geobiebands
+        public static ulong MINIGAMES_WARBANDS_CHANNEL = 0;
+        public static ulong WARBANDS_WARBANDS_CHANNEL = 0;
 
         public static string FILEPATH = "C:\\Minigames\\";
 

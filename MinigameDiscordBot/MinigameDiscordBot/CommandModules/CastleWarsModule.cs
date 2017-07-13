@@ -44,7 +44,7 @@ namespace MinigamesDiscordBot.CommandModules
         public async Task Start()
         {
             //getting the user on the server to see their roles
-            SocketGuild s = _client.GetGuild(Config.SERVER_ID);
+            SocketGuild s = _client.GetGuild(Config.SERVER_ID_MINIGAMES);
             SocketGuildUser u = s.GetUser(Context.User.Id);
 
             bool roleFound = false; //to output correct message
@@ -174,7 +174,7 @@ namespace MinigamesDiscordBot.CommandModules
             bool found = false;
             bool isAdmin = false;
 
-            SocketGuild server = _client.GetGuild(Config.SERVER_ID);
+            SocketGuild server = _client.GetGuild(Config.SERVER_ID_MINIGAMES);
             SocketGuildUser us = server.GetUser(Context.User.Id);
 
             foreach (SocketRole role in us.Roles)
@@ -216,8 +216,8 @@ namespace MinigamesDiscordBot.CommandModules
         
         private async Task UpdateTextChannel()
         {
-            SocketGuild guild = _client.GetGuild(Config.SERVER_ID);//loads server info
-            SocketTextChannel channel = guild.GetTextChannel(Config.CWS_CHANNEL); //loads channel info
+            SocketGuild guild = _client.GetGuild(Config.SERVER_ID_MINIGAMES);//loads server info
+            SocketTextChannel channel = guild.GetTextChannel(Config.MINIGAMES_CWS_CHANNEL); //loads channel info
 
             //delete any and all previous messages
             var messages = await channel.GetMessagesAsync(100).Flatten();
