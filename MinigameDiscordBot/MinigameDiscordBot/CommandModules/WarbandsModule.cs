@@ -3,9 +3,6 @@ using Discord.Commands;
 using Discord.WebSocket;
 using MinigameDiscordBot.Entities;
 using MinigamesDiscordBot;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MinigameDiscordBot.CommandModules
@@ -93,6 +90,8 @@ namespace MinigameDiscordBot.CommandModules
             await UpdateChannel();
             await ReplyAsync(output);
         }
+
+
 
         private async Task UpdateChannel()
         {
