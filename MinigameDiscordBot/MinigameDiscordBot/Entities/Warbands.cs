@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.Linq;
 
 namespace MinigameDiscordBot.Entities
 {
@@ -16,6 +16,8 @@ namespace MinigameDiscordBot.Entities
             elmWorlds = new List<WarbandsWorld>();
             rdiWorlds = new List<WarbandsWorld>();
             worlds = new string[3];
+
+            ClearList();
         }
 
         //adds a world to the correct list
@@ -135,43 +137,45 @@ namespace MinigameDiscordBot.Entities
         {
             string output = "";
 
-            dwfWorlds.Sort();
-            elmWorlds.Sort();
-            rdiWorlds.Sort();
+            worlds[0] = ""; worlds[1] = ""; worlds[2] = "";
 
-            output += "Beaming - **99**, Broken - 99, Dead - ~99~\n\n";
+            List<WarbandsWorld> dwfsorted = dwfWorlds.OrderBy(o => o.WorldNum).ToList();
+            List<WarbandsWorld> elmsorted = elmWorlds.OrderBy(o => o.WorldNum).ToList();
+            List<WarbandsWorld> rdisorted = rdiWorlds.OrderBy(o => o.WorldNum).ToList();
 
-            for(int i = 0; i < dwfWorlds.Count; ++i)
+            output += "Beaming - **99**, Broken - 99, Dead - ~~99~~\n\n";
+
+            for(int i = 0; i < dwfsorted.Count; ++i)
             {
                 if(worlds[0] == "")
                 {
-                    worlds[0] += OutputWorldWithStatus(dwfWorlds[i]);
+                    worlds[0] += OutputWorldWithStatus(dwfsorted[i]);
                 }
                 else
                 {
-                    worlds[0] += ", " + OutputWorldWithStatus(dwfWorlds[i]);
+                    worlds[0] += ", " + OutputWorldWithStatus(dwfsorted[i]);
                 }
             }
-            for (int i = 0; i < elmWorlds.Count; ++i)
+            for (int i = 0; i < elmsorted.Count; ++i)
             {
                 if (worlds[1] == "")
                 {
-                    worlds[1] += OutputWorldWithStatus(elmWorlds[i]);
+                    worlds[1] += OutputWorldWithStatus(elmsorted[i]);
                 }
                 else
                 {
-                    worlds[1] += ", " + OutputWorldWithStatus(elmWorlds[i]);
+                    worlds[1] += ", " + OutputWorldWithStatus(elmsorted[i]);
                 }
             }
-            for (int i = 0; i < rdiWorlds.Count; ++i)
+            for (int i = 0; i < rdisorted.Count; ++i)
             {
                 if (worlds[2] == "")
                 {
-                    worlds[2] += OutputWorldWithStatus(rdiWorlds[i]);
+                    worlds[2] += OutputWorldWithStatus(rdisorted[i]);
                 }
                 else
                 {
-                    worlds[2] += ", " + OutputWorldWithStatus(rdiWorlds[i]);
+                    worlds[2] += ", " + OutputWorldWithStatus(rdisorted[i]);
                 }
             }
 
@@ -211,7 +215,7 @@ namespace MinigameDiscordBot.Entities
             }
             else if(w.Status == "dead")
             {
-                output = "~" + w.WorldNum + "~";
+                output = "~~" + w.WorldNum + "~~";
             }
 
             return output;

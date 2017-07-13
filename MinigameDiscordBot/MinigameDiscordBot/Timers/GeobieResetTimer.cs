@@ -101,8 +101,8 @@ namespace MinigameDiscordBot.Timers
         //updates the text channel
         private async Task UpdateTextChannel()
         {
-            SocketGuild guild = _client.GetGuild(Config.SERVER_ID);//loads server info
-            SocketTextChannel channel = guild.GetTextChannel(Config.GEOBIE_CHANNEL); //loads channel info
+            SocketGuild guild = _client.GetGuild(Config.MINIGAMES_SERVER_ID);//loads server info
+            SocketTextChannel channel = guild.GetTextChannel(Config.MINIGAMES_GEOBIE_CHANNEL); //loads channel info
 
             //delete any and all previous messages
             var messages = await channel.GetMessagesAsync(100).Flatten();

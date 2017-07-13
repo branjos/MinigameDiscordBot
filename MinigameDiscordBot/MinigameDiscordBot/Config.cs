@@ -17,6 +17,8 @@ namespace MinigamesDiscordBot
 
         public static string FILEPATH = "C:\\Minigames\\";
 
+        public static ulong MINIGAMES_SERVER_ID { get; internal set; }
+
         //read the contents of config.txt
         public static void GetConfigInfo()
         {

@@ -2,6 +2,7 @@
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
+using MinigameDiscordBot.CommandModules;
 using MinigameDiscordBot.Entities;
 using MinigameDiscordBot.Timers;
 using MinigamesDiscordBot.CommandModules;
@@ -95,6 +96,7 @@ namespace MinigamesDiscordBot
             // and other dependencies that your commands might need.
             _map.AddSingleton(new CastleWarsGame());
             _map.AddSingleton(new GeobieBands());
+            _map.AddSingleton(new Warbands());
             _map.AddSingleton(_client);
 
 
@@ -105,6 +107,8 @@ namespace MinigamesDiscordBot
             await _commands.AddModuleAsync<CastleWarsModule>();
             await _commands.AddModuleAsync<GeobieBandsModule>();
             await _commands.AddModuleAsync<HelpModule>();
+            await _commands.AddModuleAsync<WarbandsModule>();
+
 
             //add timers
             TimerContainer timers = new TimerContainer(_services);

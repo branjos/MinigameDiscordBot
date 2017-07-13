@@ -98,19 +98,19 @@ namespace MinigameDiscordBot.CommandModules
             SocketGuild geobieGuild = _client.GetGuild(Config.SERVER_ID_MINIGAMES);//loads server info
             SocketTextChannel minigamesChannel = geobieGuild.GetTextChannel(Config.MINIGAMES_WARBANDS_CHANNEL); //loads channel info
 
-            SocketGuild warbandsGuild = _client.GetGuild(Config.SERVER_ID_WARBANDS);
-            SocketTextChannel warbandsChannel = warbandsGuild.GetTextChannel(Config.WARBANDS_WARBANDS_CHANNEL);
+        //    SocketGuild warbandsGuild = _client.GetGuild(Config.SERVER_ID_WARBANDS);
+         //   SocketTextChannel warbandsChannel = warbandsGuild.GetTextChannel(Config.WARBANDS_WARBANDS_CHANNEL);
 
             //delete any and all previous messages
             var messages1 = await minigamesChannel.GetMessagesAsync(100).Flatten();
             await minigamesChannel.DeleteMessagesAsync(messages1);
 
-            var messages2 = await warbandsChannel.GetMessagesAsync(100).Flatten();
-            await warbandsChannel.DeleteMessagesAsync(messages2);
+        //    var messages2 = await warbandsChannel.GetMessagesAsync(100).Flatten();
+        //    await warbandsChannel.DeleteMessagesAsync(messages2);
 
             //give output
             await minigamesChannel.SendMessageAsync(_bands.GetOutput());
-            await warbandsChannel.SendMessageAsync(_bands.GetOutput());
+         //   await warbandsChannel.SendMessageAsync(_bands.GetOutput());
         }
     }
 }
