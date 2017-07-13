@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 
@@ -14,6 +15,7 @@ namespace MinigamesDiscordBot
         public static ulong MINIGAMES_GEOBIE_CHANNEL = 0; //output for geobiebands
         public static ulong MINIGAMES_WARBANDS_CHANNEL = 0;
         public static ulong WARBANDS_WARBANDS_CHANNEL = 0;
+        public static List<ulong> ADMIN_ID = new List<ulong>();
 
         public static string FILEPATH = "C:\\Minigames\\";
 
@@ -42,6 +44,11 @@ namespace MinigamesDiscordBot
                     MINIGAMES_GEOBIE_CHANNEL = Convert.ToUInt64(csv[4]);
                     MINIGAMES_WARBANDS_CHANNEL = Convert.ToUInt64(csv[5]);
                     WARBANDS_WARBANDS_CHANNEL = Convert.ToUInt64(csv[6]);
+                    string[] adminids = csv[7].Split(';');
+                    for(int i = 0; i < adminids.Length; ++i)
+                    {
+                        ADMIN_ID.Add(Convert.ToUInt64(adminids[i]));
+                    }
                 }
             }
             sr.Dispose(); //IMPORTANT - must dispose the stream
@@ -57,9 +64,22 @@ namespace MinigamesDiscordBot
             var file = File.Create(path);
             var sw = new StreamWriter(file);
 
+            string idoutput = "";
+            foreach(ulong id in ADMIN_ID)
+            {
+                if(idoutput == "")
+                {
+                    idoutput += id;
+                }
+                else
+                {
+                    idoutput += ";" + id;
+                }
+            }
+
             sw.WriteLine(BOT_TOKEN + "," + SERVER_ID_MINIGAMES + "," + SERVER_ID_WARBANDS + "," +
                 MINIGAMES_CWS_CHANNEL + "," + MINIGAMES_GEOBIE_CHANNEL + "," + MINIGAMES_WARBANDS_CHANNEL + "," +
-                WARBANDS_WARBANDS_CHANNEL);
+                WARBANDS_WARBANDS_CHANNEL+ "," + idoutput);
 
             sw.Dispose();
             file.Dispose();
