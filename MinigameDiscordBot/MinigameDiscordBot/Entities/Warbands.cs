@@ -30,7 +30,7 @@ namespace MinigameDiscordBot.Entities
                 if (!w.IsFreeWorld)
                 {
                     dwfWorlds.Add(w);
-                    return "World " + num + " added as a " + loc + "world.";
+                    return "World " + num + " added as a " + loc + " world.";
                 }
                 else
                 {
@@ -42,7 +42,7 @@ namespace MinigameDiscordBot.Entities
                 if (!w.IsFreeWorld)
                 {
                     elmWorlds.Add(w);
-                    return "World " + num + " added as a " + loc + "world.";
+                    return "World " + num + " added as a " + loc + " world.";
                 }
                 else
                 {
@@ -54,7 +54,7 @@ namespace MinigameDiscordBot.Entities
                 if (!w.IsFreeWorld)
                 {
                     rdiWorlds.Add(w);
-                    return "World " + num + " added as a " + loc + "world.";
+                    return "World " + num + " added as a " + loc + " world.";
                 }
                 else
                 {
