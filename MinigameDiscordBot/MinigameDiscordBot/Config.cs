@@ -57,7 +57,7 @@ namespace MinigamesDiscordBot
             Console.WriteLine("Config Loaded.");
         }
 
-        public void UpdateTextFile()
+        public static void UpdateTextFile()
         {
             string path = "C:\\Minigames\\config.txt";
 

@@ -13,6 +13,7 @@ namespace MinigameDiscordBot.CommandModules
             if (Config.ADMIN_ID.Contains(Context.User.Id))
             {
                 Config.SERVER_ID_WARBANDS = id;
+                Config.UpdateTextFile();
                 //logger
                 await ReplyAsync("Id updated.");
             }
@@ -28,6 +29,7 @@ namespace MinigameDiscordBot.CommandModules
             if (Config.ADMIN_ID.Contains(Context.User.Id))
             {
                 Config.SERVER_ID_MINIGAMES = id;
+                Config.UpdateTextFile();
                 //logger
                 await ReplyAsync("Id updated.");
             }
@@ -43,6 +45,7 @@ namespace MinigameDiscordBot.CommandModules
             if (Config.ADMIN_ID.Contains(Context.User.Id))
             {
                 Config.MINIGAMES_CWS_CHANNEL = id;
+                Config.UpdateTextFile();
                 //logger
                 await ReplyAsync("Id updated.");
             }
@@ -58,6 +61,7 @@ namespace MinigameDiscordBot.CommandModules
             if (Config.ADMIN_ID.Contains(Context.User.Id))
             {
                 Config.MINIGAMES_GEOBIE_CHANNEL = id;
+                Config.UpdateTextFile();
                 //logger
                 await ReplyAsync("Id updated.");
             }
@@ -73,6 +77,7 @@ namespace MinigameDiscordBot.CommandModules
             if (Config.ADMIN_ID.Contains(Context.User.Id))
             {
                 Config.MINIGAMES_WARBANDS_CHANNEL = id;
+                Config.UpdateTextFile();
                 //logger
                 await ReplyAsync("Id updated.");
             }
@@ -88,6 +93,7 @@ namespace MinigameDiscordBot.CommandModules
             if (Config.ADMIN_ID.Contains(Context.User.Id))
             {
                 Config.WARBANDS_WARBANDS_CHANNEL = id;
+                Config.UpdateTextFile();
                 //logger
                 await ReplyAsync("Id updated.");
             }
@@ -97,7 +103,7 @@ namespace MinigameDiscordBot.CommandModules
             }
         }
 
-        [Command("AdAdminId")]
+        [Command("AddAdminId")]
         public async Task AddAdmin(ulong id)
         {
             if (Config.ADMIN_ID.Contains(Context.User.Id))
@@ -109,6 +115,7 @@ namespace MinigameDiscordBot.CommandModules
                 else
                 {
                     Config.ADMIN_ID.Add(id);
+                    Config.UpdateTextFile();
                     //logger
                     await ReplyAsync("Id added.");
                 }
@@ -131,6 +138,7 @@ namespace MinigameDiscordBot.CommandModules
                 else
                 {
                     Config.ADMIN_ID.Remove(id);
+                    Config.UpdateTextFile();
                     //logger
                     await ReplyAsync("Id removed.");
                 }
