@@ -16,7 +16,7 @@ namespace MinigameDiscordBot.Entities
         public WarbandsWorld(int worldnum)
         {
             WorldNum = worldnum;
-            Status = "";
+            Status = "beaming";
             IsFreeWorld = false;
             for (int i = 0; i < freeWorlds.Length; ++i)
             {
@@ -26,27 +26,6 @@ namespace MinigameDiscordBot.Entities
                     break;
                 }
             }
-        }
-
-        public string UpdateStatus(string status)
-        {
-            if(status == "beaming")
-            {
-                Status = status;
-            } 
-            else if(status == "dead")
-            {
-                Status = status;
-            }
-            else if(status == "broken")
-            {
-                Status = status;
-            }
-            else
-            {
-                return "That status is not valid.";
-            }
-            return "Status updated.";
         }
 
         public bool Equals(WarbandsWorld other)
