@@ -1,6 +1,7 @@
 ﻿using Discord.Commands;
 using System.Threading.Tasks;
 using MinigamesDiscordBot;
+using MinigameDiscordBot.Util;
 
 namespace MinigameDiscordBot.CommandModules
 {
@@ -14,7 +15,9 @@ namespace MinigameDiscordBot.CommandModules
             {
                 Config.SERVER_ID_WARBANDS = id;
                 Config.UpdateTextFile();
-                //logger
+                Logger l = new Logger();
+                l.Log(Context.User.ToString() + " updated Warbands Server Id");
+                l.Dispose();
                 await ReplyAsync("Id updated.");
             }
             else
@@ -30,7 +33,9 @@ namespace MinigameDiscordBot.CommandModules
             {
                 Config.SERVER_ID_MINIGAMES = id;
                 Config.UpdateTextFile();
-                //logger
+                Logger l = new Logger();
+                l.Log(Context.User.ToString() + " updated Minigames Server Id");
+                l.Dispose();
                 await ReplyAsync("Id updated.");
             }
             else
@@ -46,7 +51,9 @@ namespace MinigameDiscordBot.CommandModules
             {
                 Config.MINIGAMES_CWS_CHANNEL = id;
                 Config.UpdateTextFile();
-                //logger
+                Logger l = new Logger();
+                l.Log(Context.User.ToString() + " updated Minigames Castlewars Channel Id");
+                l.Dispose();
                 await ReplyAsync("Id updated.");
             }
             else
@@ -62,7 +69,9 @@ namespace MinigameDiscordBot.CommandModules
             {
                 Config.MINIGAMES_GEOBIE_CHANNEL = id;
                 Config.UpdateTextFile();
-                //logger
+                Logger l = new Logger();
+                l.Log(Context.User.ToString() + " updated Minigames Geobie Channel Id");
+                l.Dispose();
                 await ReplyAsync("Id updated.");
             }
             else
@@ -78,7 +87,9 @@ namespace MinigameDiscordBot.CommandModules
             {
                 Config.MINIGAMES_WARBANDS_CHANNEL = id;
                 Config.UpdateTextFile();
-                //logger
+                Logger l = new Logger();
+                l.Log(Context.User.ToString() + " updated Minigames Warbands Channel Id");
+                l.Dispose();
                 await ReplyAsync("Id updated.");
             }
             else
@@ -94,7 +105,9 @@ namespace MinigameDiscordBot.CommandModules
             {
                 Config.WARBANDS_WARBANDS_CHANNEL = id;
                 Config.UpdateTextFile();
-                //logger
+                Logger l = new Logger();
+                l.Log(Context.User.ToString() + " updated Warbands' Warbands Channel Id");
+                l.Dispose();
                 await ReplyAsync("Id updated.");
             }
             else
@@ -116,7 +129,9 @@ namespace MinigameDiscordBot.CommandModules
                 {
                     Config.ADMIN_ID.Add(id);
                     Config.UpdateTextFile();
-                    //logger
+                    Logger l = new Logger();
+                    l.Log(Context.User.ToString() + " added an admin(" + id + ")");
+                    l.Dispose();
                     await ReplyAsync("Id added.");
                 }
             }
@@ -139,7 +154,9 @@ namespace MinigameDiscordBot.CommandModules
                 {
                     Config.ADMIN_ID.Remove(id);
                     Config.UpdateTextFile();
-                    //logger
+                    Logger l = new Logger();
+                    l.Log(Context.User.ToString() + " removed an admin(" + id + ")");
+                    l.Dispose();
                     await ReplyAsync("Id removed.");
                 }
             }
