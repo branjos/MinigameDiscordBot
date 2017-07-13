@@ -34,15 +34,33 @@ namespace MinigamesDiscordBot
                 {
                     string[] csv = line.Split(',');
                     BOT_TOKEN = csv[0];
-                    SERVER_ID = Convert.ToUInt64(csv[1]);
-                    CWS_CHANNEL = Convert.ToUInt64(csv[2]);
-                    GEOBIE_CHANNEL = Convert.ToUInt64(csv[3]);
+                    SERVER_ID_MINIGAMES = Convert.ToUInt64(csv[1]);
+                    SERVER_ID_WARBANDS = Convert.ToUInt64(csv[2]);
+                    MINIGAMES_CWS_CHANNEL = Convert.ToUInt64(csv[3]);
+                    MINIGAMES_GEOBIE_CHANNEL = Convert.ToUInt64(csv[4]);
+                    MINIGAMES_WARBANDS_CHANNEL = Convert.ToUInt64(csv[5]);
+                    WARBANDS_WARBANDS_CHANNEL = Convert.ToUInt64(csv[6]);
                 }
             }
             sr.Dispose(); //IMPORTANT - must dispose the stream
             file.Dispose(); //IMPORTANT - must dispose the file
 
             Console.WriteLine("Config Loaded.");
+        }
+
+        public void UpdateTextFile()
+        {
+            string path = "C:\\Minigames\\config.txt";
+
+            var file = File.Create(path);
+            var sw = new StreamWriter(file);
+
+            sw.WriteLine(BOT_TOKEN + "," + SERVER_ID_MINIGAMES + "," + SERVER_ID_WARBANDS + "," +
+                MINIGAMES_CWS_CHANNEL + "," + MINIGAMES_GEOBIE_CHANNEL + "," + MINIGAMES_WARBANDS_CHANNEL + "," +
+                WARBANDS_WARBANDS_CHANNEL);
+
+            sw.Dispose();
+            file.Dispose();
         }
     }
 }
