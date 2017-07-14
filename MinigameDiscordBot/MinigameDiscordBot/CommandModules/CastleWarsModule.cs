@@ -24,13 +24,13 @@ namespace MinigamesDiscordBot.CommandModules
             _client = client;
 
             help += "**Coordination Commands**\n";
-            help += "`_StartGames` Starts games of Castle Wars\n";
-            help += "`_ChangeCoord <user#1111>` Changes the coordinator of the game.\n";
-            help += "`_AddP <s, z> <username>` Adds a perm member to either team.\n";
-            help += "`_AddR <username>` Adds a rotating member to available team.\n";
-            help += "`_Remove <username>` Removes a user from the games.\n";
-            help += "`_NewRound` Use this at the start of each round to switch teams.\n";
-            help += "`_StopGames` This closes the games.\n";
+            help += "`-StartGames` Starts games of Castle Wars\n";
+            help += "`-ChangeCoord <user#1111>` Changes the coordinator of the game.\n";
+            help += "`-AddP <s, z> <username>` Adds a perm member to either team.\n";
+            help += "`-AddR <username>` Adds a rotating member to available team.\n";
+            help += "`-Remove <username>` Removes a user from the games.\n";
+            help += "`-NewRound` Use this at the start of each round to switch teams.\n";
+            help += "`-StopGames` This closes the games.\n";
         }
 
 

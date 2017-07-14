@@ -14,7 +14,7 @@ namespace MinigameDiscordBot.Util
 
         public Logger()
         {
-            file = File.OpenWrite(path);
+            file = File.Open(path, FileMode.Append);
             sr = new StreamWriter(file);
         }
 

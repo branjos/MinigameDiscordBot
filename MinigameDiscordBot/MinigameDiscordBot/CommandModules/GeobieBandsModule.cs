@@ -18,9 +18,15 @@ namespace MinigamesDiscordBot.CommandModules
             _bands = bands;
             _client = client;
 
-            help += "`_s <world> <a, f, w> <username>` Registers a scout to the proper world and skills.\n";
-            help += "`_Dead <world>` Make a world dead.\n";
-            help += "`_RemoveWorld <world>` Removes a world from the list.\n";
+            help += "`-s <world> <a, f, w> <username>` Registers a scout to the proper world and skills.\n";
+            help += "`-Dead <world>` Make a world dead.\n";
+            help += "`-RemoveWorld <world>` Removes a world from the list.\n\n";
+
+            help += "```\n";
+            help += "Early spawn worlds: 12, 14, 15, 30, 37, 49, 50, 51, 65, 83, 84\n";
+            help += "Early spawn worlds spawn at: 02 and die at: 22\n";
+            help += "All other worlds spawn at: 05 and die at: 25\n\n\n";
+            help += "```";
         }
 
         [Command("s")]
