@@ -9,32 +9,70 @@ namespace MinigamesDiscordBot.CommandModules
         [Command("help")]
         public async Task Help()
         {
-            string output = "**General Commands**\n";
-            output += "`-help` This command.\n";
-            output += "`-about` Information about this bot.\n";
-            output += "`-Spotlight` Not implemented yet.\n\n";
-
-            output += "**Coordination Commands**\n";
-            output += "`-StartGames` Starts games of Castle Wars\n";
-            output += "`-ChangeCoord <user#1111>` Changes the coordinator of the game.\n";
-            output += "`-AddP <s, z> <username>` Adds a perm member to either team.\n";
-            output += "`-AddR <username>` Adds a rotating member to available team.\n";
-            output += "`-Remove <username>` Removes a user from the games.\n";
-            output += "`-NewRound` Use this at the start of each round to switch teams.\n";
-            output += "`-StopGames` This closes the games.\n\n";
-
-            output += "**Geobiebands Commands**\n";
-            output += "`-s <world> <a, f, w> <username>` Registers a scout to the proper world and skills.\n";
-            output += "`-Dead <world>` Make a world dead.\n";
-            output += "`-RemoveWorld <world>` Removes a world from the list.\n";
-            output += "`-ClearInfo` Clears the current geobiebands info.\n";
-            output += "`-OutputTotals` Prints out total number of scouts per user.\n";
-            output += "`-ClearInfoMonthly` Clears user total scouts for the month.\n";
+            
 
             //await ReplyAsync(output);
             var eb = new EmbedBuilder();
-            eb.WithDescription(output);
+            var eb2 = new EmbedBuilder();
+            var eb3 = new EmbedBuilder();
+            var eb4 = new EmbedBuilder();
+
+            //general commands
+            EmbedFieldBuilder GeneralHelpCommandField = new EmbedFieldBuilder();
+            GeneralHelpCommandField.Name = "General Help";
+            GeneralHelpCommandField.Value = "`-Help`\n`-About`\n`-Spotlight`";
+            GeneralHelpCommandField.WithIsInline(true);
+            EmbedFieldBuilder GeneralHelpDescriptionField = new EmbedFieldBuilder();
+            GeneralHelpDescriptionField.Name = "Description";
+            GeneralHelpDescriptionField.IsInline = true;
+            GeneralHelpDescriptionField.Value = "This command.\nGeneral information about this bot.\nMinigame Spotlight information.";
+
+            //coord commands
+            EmbedFieldBuilder CoordHelpCommandField = new EmbedFieldBuilder();
+            CoordHelpCommandField.Name = "Coordination Commands";
+            CoordHelpCommandField.Value = "`-StartGames`\n`-ChangeCoord <user#1111>`\n`-AddP <s, z> <username>`\n" +
+                "`-AddR <username>`\n`-Remove <username>`\n`-NewRound`\n`-StopGames`";
+            CoordHelpCommandField.WithIsInline(true);
+            EmbedFieldBuilder CoordHelpDescriptionField = new EmbedFieldBuilder();
+            CoordHelpDescriptionField.Name = "Description";
+            CoordHelpDescriptionField.IsInline = true;
+            CoordHelpDescriptionField.Value = "Starts games of Castle Wars.\nChanges the coordinator of the game.\n" +
+                "Adds a perm member to either team.\nAdds a rotating member to available team.\nRemoves a user from the games.\n" +
+                "Use this at the start of each round to switch teams.\nThis closes the games.";
+
+            //geobie commands
+            EmbedFieldBuilder GeobieHelpCommandField = new EmbedFieldBuilder();
+            GeobieHelpCommandField.Name = "Goebiebands Commands";
+            GeobieHelpCommandField.Value = "`-s <world> <type> <user>`\n`-dead <world>`\n`-removeworld <world>`\n`-clearinfo`\n`-outputtotals`";
+            GeobieHelpCommandField.WithIsInline(true);
+            EmbedFieldBuilder GeobieHelpDescriptionField = new EmbedFieldBuilder();
+            GeobieHelpDescriptionField.Name = "Description";
+            GeobieHelpDescriptionField.IsInline = true;
+            GeobieHelpDescriptionField.Value = "Registers a scout. Types: a, f, w.\nMark a world dead.\nRemoves a world from the list.\nClears the current Goebiebands info.\nPrints out total number of scouts per user.";
+
+            //warbands commands
+            EmbedFieldBuilder WarbandsHelpCommandField = new EmbedFieldBuilder();
+            WarbandsHelpCommandField.Name = "Warbands Commands";
+            WarbandsHelpCommandField.Value = "`-w <world> <type>`\n`-ClearWarbands`";
+            WarbandsHelpCommandField.WithIsInline(true);
+            EmbedFieldBuilder WarbandsHelpDescriptionField = new EmbedFieldBuilder();
+            WarbandsHelpDescriptionField.Name = "Description";
+            WarbandsHelpDescriptionField.IsInline = true;
+            WarbandsHelpDescriptionField.Value = "Adds or edits a world.\nClears the current list.";
+
+            eb.AddField(GeneralHelpCommandField);
+            eb.AddField(GeneralHelpDescriptionField);
+            eb2.AddField(CoordHelpCommandField);
+            eb2.AddField(CoordHelpDescriptionField);
+            eb3.AddField(GeobieHelpCommandField);
+            eb3.AddField(GeobieHelpDescriptionField);
+            eb4.AddField(WarbandsHelpCommandField);
+            eb4.AddField(WarbandsHelpDescriptionField);
+
             await ReplyAsync("", false, eb);
+            await ReplyAsync("", false, eb2);
+            await ReplyAsync("", false, eb3);
+            await ReplyAsync("", false, eb4);
         }
 
         [Command("help")]
