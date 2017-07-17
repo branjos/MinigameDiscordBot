@@ -17,7 +17,6 @@ namespace MinigameDiscordBot.Timers
         Timer t;
         TimeSpan timespan;
         bool start = false;
-        int dailyIteration = 1; //which time it is of geobie bands
 
         public GeobieResetTimer(DiscordSocketClient client, GeobieBands bands)
         {
@@ -50,17 +49,9 @@ namespace MinigameDiscordBot.Timers
         //updates all info
         private async void DoUpdateAsync()
         {
-            GeobieOutputFileWriter file = new GeobieOutputFileWriter(_bands.OutputForTextFile(), dailyIteration);
+            GeobieOutputFileWriter file = new GeobieOutputFileWriter(_bands.OutputForTextFile());
             _bands.ClearInfo();
             await UpdateTextChannel();
-            if (dailyIteration >= 2)
-            {
-                dailyIteration = 1;
-            }
-            else
-            {
-                dailyIteration++;
-            }
         }
 
         //gets the time until next geobiebands

@@ -26,7 +26,7 @@ namespace MinigameDiscordBot.Entities
         //clears the info from all areas
         public string ClearInfo()
         {
-            GeobieOutputFileWriter f = new GeobieOutputFileWriter(OutputForTextFile(), 0);
+            GeobieOutputFileWriter f = new GeobieOutputFileWriter(OutputForTextFile());
 
             for (int i = 0; i < worlds.Length; ++i)
             {
@@ -51,6 +51,9 @@ namespace MinigameDiscordBot.Entities
         {
             users.Clear();
             WriteToFile();
+            string[] filePaths = Directory.GetFiles(@Config.FILEPATH + "Geobie\\Outputs");
+            foreach (string filePath in filePaths)
+                File.Delete(filePath);
             return "Info cleared monthly.";
         }
 
@@ -362,48 +365,48 @@ namespace MinigameDiscordBot.Entities
         public string OutputForTextFile()
         {
             string output = "";
-            output += skills[0] + ": ";
+            output += skills[0] + " ";
             for (int i = 0; i < skill1.Count; ++i)
             {
                 if (i == 0)
                 {
-                    output += skill1[i];
+                    output += skill1[i].WorldNum;
                 }
                 else
                 {
-                    output += ", " + skill1[i];
+                    output += ", " + skill1[i].WorldNum;
                 }
             }
 
             output += ";";
 
-            output += skills[1];
+            output += skills[1] + " ";
 
             for (int i = 0; i < skill2.Count; ++i)
             {
                 if (i == 0)
                 {
-                    output += skill2[i];
+                    output += skill2[i].WorldNum;
                 }
                 else
                 {
-                    output += ", " + skill2[i];
+                    output += ", " + skill2[i].WorldNum;
                 }
             }
 
             output += ";";
 
-            output += skills[2];
+            output += skills[2] + " ";
 
             for (int i = 0; i < skill3.Count; ++i)
             {
                 if (i == 0)
                 {
-                    output += skill3[i];
+                    output += skill3[i].WorldNum;
                 }
                 else
                 {
-                    output += ", " + skill3[i];
+                    output += ", " + skill3[i].WorldNum;
                 }
             }
 
@@ -411,7 +414,15 @@ namespace MinigameDiscordBot.Entities
 
             for(int i = 0; i < users.Count; ++i)
             {
-                output += users[i].Username + ";";
+                if (users[i].CurrentScouter)
+                {
+                    output += users[i].Username;
+                    for (int j = 1; j < users[i].NumCurrentScouts; ++j)
+                    {
+                        output += "+";
+                    }
+                    output += ";";
+                }
             }
 
             return output;

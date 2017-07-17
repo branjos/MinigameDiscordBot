@@ -9,10 +9,9 @@ namespace MinigameDiscordBot.Util
         string _info = "";
         int _iteration = 0;
 
-        public GeobieOutputFileWriter(string info, int i)
+        public GeobieOutputFileWriter(string info)
         {
             _info = info;
-            _iteration = i;
 
             WriteInfoToFile();
         }
@@ -20,11 +19,18 @@ namespace MinigameDiscordBot.Util
         //writes the data to the file
         private void WriteInfoToFile()
         {
-            DateTime now = DateTime.Now;
-            string path = Config.FILEPATH + "Outputs\\" + now.Month + now.Day + "-" + _iteration + ".txt";
+            string path = Config.FILEPATH + "Geobie\\Outputs\\" + DateTime.Now.Day + " - 1.txt";
+
+            if (File.Exists(path))
+            {
+                path = Config.FILEPATH + "Geobie\\Outputs\\" + DateTime.Now.Day + " - 2.txt";
+            }
+
 
             var file = File.Create(path);
             var sw = new StreamWriter(file);
+
+            sw.WriteLine(DateTime.Now);
 
             string[] csv = _info.Split(';');
 
@@ -32,6 +38,9 @@ namespace MinigameDiscordBot.Util
             {
                 sw.WriteLine(csv[i]);
             }
+
+            sw.Dispose();
+            file.Dispose();
         }
     }
 }
