@@ -16,6 +16,8 @@ namespace MinigamesDiscordBot.CommandModules
             var eb2 = new EmbedBuilder();
             var eb3 = new EmbedBuilder();
             var eb4 = new EmbedBuilder();
+            var adminEmbed = new EmbedBuilder();
+            var settingsEmbed = new EmbedBuilder();
 
             //general commands
             EmbedFieldBuilder GeneralHelpCommandField = new EmbedFieldBuilder();
@@ -60,6 +62,10 @@ namespace MinigamesDiscordBot.CommandModules
             WarbandsHelpDescriptionField.IsInline = true;
             WarbandsHelpDescriptionField.Value = "Adds or edits a world.\nClears the current list.";
 
+            //admin embed
+            EmbedFieldBuilder AdminHelp = new EmbedFieldBuilder();
+
+
             eb.AddField(GeneralHelpCommandField);
             eb.AddField(GeneralHelpDescriptionField);
             eb2.AddField(CoordHelpCommandField);
@@ -73,6 +79,12 @@ namespace MinigamesDiscordBot.CommandModules
             await ReplyAsync("", false, eb2);
             await ReplyAsync("", false, eb3);
             await ReplyAsync("", false, eb4);
+
+            if (Config.ADMIN_ID.Contains(Context.User.Id))
+            {
+                IDMChannel userChannel = await Context.User.CreateDMChannelAsync();
+
+            }
         }
 
         [Command("help")]
