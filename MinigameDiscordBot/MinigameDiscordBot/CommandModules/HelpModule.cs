@@ -89,20 +89,29 @@ namespace MinigamesDiscordBot.CommandModules
             GeobieAdminDescriptionField.IsInline = true;
             GeobieAdminDescriptionField.Value = "Clears the current Goebiebands info.\nPrints out total number of scouts per user.";
 
+            EmbedFieldBuilder FCAdminCommands = new EmbedFieldBuilder();
+            FCAdminCommands.Name = "FC Commands";
+            FCAdminCommands.Value = "`-See <username>`\n`-printlist`\n`-promotions`\n`-clearfc`";
+            FCAdminCommands.WithIsInline(true);
+            EmbedFieldBuilder FCAdminDescription = new EmbedFieldBuilder();
+            FCAdminDescription.Name = "Description";
+            FCAdminDescription.IsInline = true;
+            FCAdminDescription.Value = "`Marks the user as seen`\n`Prints the list`\n`Prints promotions`\n`Clears all info`";
+
             //settings commands
             EmbedFieldBuilder SettingsCommandField = new EmbedFieldBuilder();
             SettingsCommandField.Name = "Settings Commands";
             SettingsCommandField.Value = "`-settings warbandsserver <ser id>`\n`-settings minigamesserver <ser id>`\n" +
                 "`-settings mcastlewarschannel <ch id>`\n`-settings mgeobiechannel <ch id>`\n`-settings " +
                 "mwarbandschannel <ch id>`\n`-settings wwarbandschannel <ch id>`\n`-settings addadminid <user id>`\n" +
-                "`-settings removeadminid <user id>`";
+                "`-settings removeadminid <user id>`\n`-settings SetFcPromotionLimit <num>`";
             SettingsCommandField.WithIsInline(true);
             EmbedFieldBuilder SettingsDescriptionField = new EmbedFieldBuilder();
             SettingsDescriptionField.Name = "Description";
             SettingsDescriptionField.IsInline = true;
             SettingsDescriptionField.Value = "`Sets the warbands server`\n`Sets the minigames server`\n`Sets the minigames cws channel`\n" +
                 "`Sets the minigames geobie channel`\n`Sets the minigames wbs channel`\n`Sets the warbands wbs channel`\n" +
-                "`Adds a bot admin`\n`Removes a bot admin`";
+                "`Adds a bot admin`\n`Removes a bot admin`\n`Sets number of sees needed for promotion`";
 
             //add embed fields to the builders
             eb.AddField(GeneralHelpCommandField);
@@ -115,6 +124,8 @@ namespace MinigamesDiscordBot.CommandModules
             eb4.AddField(WarbandsHelpDescriptionField);
             adminEmbed.AddField(GeobieAdminCommandField);
             adminEmbed.AddField(GeobieAdminDescriptionField);
+            adminEmbed.AddField(FCAdminCommands);
+            adminEmbed.AddField(FCAdminDescription);
             settingsEmbed.AddField(SettingsCommandField);
             settingsEmbed.AddField(SettingsDescriptionField);
 

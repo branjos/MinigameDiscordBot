@@ -35,6 +35,7 @@ namespace MinigameDiscordBot.Entities
                     }
                     else
                     {
+                        found = true;
                         output = "User had already been seen.";
                     }
                 }
@@ -44,6 +45,8 @@ namespace MinigameDiscordBot.Entities
             {
                 User u = new User();
                 u.Username = username;
+                u.TimesSeen++;
+                u.SeenToday = true;
                 users.Add(u);
                 output = "User created.";
             }

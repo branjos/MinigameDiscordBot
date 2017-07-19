@@ -110,6 +110,7 @@ namespace MinigamesDiscordBot
             await _commands.AddModuleAsync<HelpModule>();
             await _commands.AddModuleAsync<WarbandsModule>();
             await _commands.AddModuleAsync<SettingsModule>();
+            await _commands.AddModuleAsync<FcModule>();
 
 
             //add timers
