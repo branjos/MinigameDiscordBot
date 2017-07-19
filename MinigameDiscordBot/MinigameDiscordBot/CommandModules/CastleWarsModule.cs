@@ -14,7 +14,7 @@ namespace MinigamesDiscordBot.CommandModules
         CastleWarsGame _game;
         DiscordSocketClient _client;
 
-        string help = "";
+        EmbedBuilder eb = new EmbedBuilder();
 
         //constructor - when the object is created this is called
         public CastleWarsModule(DiscordSocketClient client, CastleWarsGame game)
@@ -23,14 +23,20 @@ namespace MinigamesDiscordBot.CommandModules
             _game = game;
             _client = client;
 
-            help += "**Coordination Commands**\n";
-            help += "`-StartGames` Starts games of Castle Wars\n";
-            help += "`-ChangeCoord <user#1111>` Changes the coordinator of the game.\n";
-            help += "`-AddP <s, z> <username>` Adds a perm member to either team.\n";
-            help += "`-AddR <username>` Adds a rotating member to available team.\n";
-            help += "`-Remove <username>` Removes a user from the games.\n";
-            help += "`-NewRound` Use this at the start of each round to switch teams.\n";
-            help += "`-StopGames` This closes the games.\n";
+            EmbedFieldBuilder CoordHelpCommandField = new EmbedFieldBuilder();
+            CoordHelpCommandField.Name = "Coordination Commands";
+            CoordHelpCommandField.Value = "`-StartGames`\n`-ChangeCoord <user#1111>`\n`-AddP <s, z> <username>`\n" +
+                "`-AddR <username>`\n`-Remove <username>`\n`-NewRound`\n`-StopGames`";
+            CoordHelpCommandField.WithIsInline(true);
+            EmbedFieldBuilder CoordHelpDescriptionField = new EmbedFieldBuilder();
+            CoordHelpDescriptionField.Name = "Description";
+            CoordHelpDescriptionField.IsInline = true;
+            CoordHelpDescriptionField.Value = "Starts games of Castle Wars.\nChanges the coordinator of the game.\n" +
+                "Adds a perm member to either team.\nAdds a rotating member to available team.\nRemoves a user from the games.\n" +
+                "Use this at the start of each round to switch teams.\nThis closes the games.";
+
+            eb.AddField(CoordHelpCommandField);
+            eb.AddField(CoordHelpDescriptionField);
         }
 
 
@@ -224,7 +230,7 @@ namespace MinigamesDiscordBot.CommandModules
             await channel.DeleteMessagesAsync(messages);
 
             //give output
-            await channel.SendMessageAsync(help);
+            await channel.SendMessageAsync("", false, eb);
             await channel.SendMessageAsync(_game.OutputTable());
         }
     }
