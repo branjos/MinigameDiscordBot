@@ -48,8 +48,9 @@ namespace MinigameDiscordBot.Timers
 
             DateTime nowInUTC = TimeZoneInfo.ConvertTime(DateTime.Now, britTimeZone);
 
-
-
+            /*
+             * AddHours below in both the console and the return statement need to be removed when dst is over.
+             */
 
             DateTime reset = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddDays(1);
             Console.WriteLine("Time until reset: " + (reset - nowInUTC.AddHours(-1)).ToString());
