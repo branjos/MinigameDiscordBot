@@ -165,5 +165,23 @@ namespace MinigameDiscordBot.CommandModules
                 await ReplyAsync("You do not have permission to use this command.");
             }
         }
+
+        [Command("SetFcPromotionLimit")]
+        public async Task Promotions(int num)
+        {
+            if (Config.ADMIN_ID.Contains(Context.User.Id))
+            {
+                Config.FC_PROMOTION_LIMIT = num;
+                Config.UpdateTextFile();
+                Logger l = new Logger();
+                l.Log(Context.User.ToString() + " updated FC Promotion number.");
+                l.Dispose();
+                await ReplyAsync("Promotion number updated.");
+            }
+            else
+            {
+                await ReplyAsync("You do not have permission to use this command.");
+            }
+        }
     }
 }
