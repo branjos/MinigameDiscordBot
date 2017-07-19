@@ -11,22 +11,25 @@ namespace MinigamesDiscordBot.CommandModules
     {
         GeobieBands _bands;
         DiscordSocketClient _client;
-        string help = "**Geobiebands Commands**\n";
+        EmbedBuilder eb1 = new EmbedBuilder();
+
 
         public GeobieBandsModule(GeobieBands bands, DiscordSocketClient client)
         {
             _bands = bands;
             _client = client;
 
-            help += "`-s <world> <a, f, w> <username>` Registers a scout to the proper world and skills.\n";
-            help += "`-Dead <world>` Make a world dead.\n";
-            help += "`-RemoveWorld <world>` Removes a world from the list.\n\n";
+            EmbedFieldBuilder GeobieHelpCommandField = new EmbedFieldBuilder();
+            GeobieHelpCommandField.Name = "Goebiebands Commands";
+            GeobieHelpCommandField.Value = "`-s <world> <type> <user>`\n`-dead <world>`\n`-removeworld <world>`\n`-clearinfo`\n`-outputtotals`";
+            GeobieHelpCommandField.WithIsInline(true);
+            EmbedFieldBuilder GeobieHelpDescriptionField = new EmbedFieldBuilder();
+            GeobieHelpDescriptionField.Name = "Description";
+            GeobieHelpDescriptionField.IsInline = true;
+            GeobieHelpDescriptionField.Value = "Registers a scout. Types: a, f, w.\nMark a world dead.\nRemoves a world from the list.\nClears the current Goebiebands info.\nPrints out total number of scouts per user.";
 
-            help += "```\n";
-            help += "Early spawn worlds: 12, 14, 15, 30, 37, 49, 50, 51, 65, 83, 84\n";
-            help += "Early spawn worlds spawn at: 02 and die at: 22\n";
-            help += "All other worlds spawn at: 05 and die at: 25\n\n\n";
-            help += "```";
+            eb1.AddField(GeobieHelpCommandField);
+            eb1.AddField(GeobieHelpDescriptionField);
         }
 
         [Command("s")]
@@ -217,7 +220,7 @@ namespace MinigamesDiscordBot.CommandModules
             await channel.DeleteMessagesAsync(messages);
 
             //give output
-            await channel.SendMessageAsync(help);
+            await channel.SendMessageAsync("", false, eb1);
             await channel.SendMessageAsync(_bands.GetOutput());
         }
     }
