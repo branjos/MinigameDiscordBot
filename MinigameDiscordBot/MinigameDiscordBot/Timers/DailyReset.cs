@@ -49,10 +49,12 @@ namespace MinigameDiscordBot.Timers
             DateTime nowInUTC = TimeZoneInfo.ConvertTime(DateTime.Now, britTimeZone);
 
 
-            DateTime reset = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddDays(1);
-            Console.WriteLine("Time until reset: " + (reset - nowInUTC).ToString());
 
-            return reset - nowInUTC;
+
+            DateTime reset = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddDays(1);
+            Console.WriteLine("Time until reset: " + (reset - nowInUTC.AddHours(-1)).ToString());
+
+            return reset - nowInUTC.AddHours(-1);
         }
 
         //updates data
