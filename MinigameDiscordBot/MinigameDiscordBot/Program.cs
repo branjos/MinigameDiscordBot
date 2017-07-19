@@ -97,6 +97,7 @@ namespace MinigamesDiscordBot
             _map.AddSingleton(new CastleWarsGame());
             _map.AddSingleton(new GeobieBands());
             _map.AddSingleton(new Warbands());
+            _map.AddSingleton(new FriendsChat());
             _map.AddSingleton(_client);
 
 

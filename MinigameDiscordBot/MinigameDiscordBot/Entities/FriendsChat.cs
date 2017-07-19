@@ -1,4 +1,6 @@
-﻿using MinigamesDiscordBot.Entities;
+﻿using MinigameDiscordBot.Util;
+using MinigamesDiscordBot;
+using MinigamesDiscordBot.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -49,7 +51,48 @@ namespace MinigameDiscordBot.Entities
             return output;
         }
 
+        public string Print()
+        {
+            OutputFormatting f = new OutputFormatting("Username", 15, "Times seen", 10);
 
+            for(int i = 0; i < users.Count; ++i)
+            {
+                f.addLine(users[i].Username, users[i].TimesSeen.ToString());
+            }
+            f.insertEnd();
+
+            return f.output;
+        }
+
+        public string PrintPromotions()
+        {
+            OutputFormatting f = new OutputFormatting("Promotions", 15, "", 0);
+
+            for(int i = 0; i < users.Count; ++i)
+            {
+                if(users[i].TimesSeen >= Config.FC_PROMOTION_LIMIT)
+                {
+                    f.addLine(users[i].Username, "");
+                }
+            }
+
+            f.insertEnd();
+            return f.output;
+        }
+
+        public string ClearList()
+        {
+            users.Clear();
+            return "List Cleared";
+        }
+
+        public void DailyReset()
+        {
+            foreach (User u in users)
+            {
+                u.SeenToday = false;
+            }
+        }
 
     }
 }

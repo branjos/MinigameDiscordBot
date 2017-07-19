@@ -15,6 +15,7 @@ namespace MinigamesDiscordBot
         public static ulong MINIGAMES_GEOBIE_CHANNEL = 0; //output for geobiebands
         public static ulong MINIGAMES_WARBANDS_CHANNEL = 0;
         public static ulong WARBANDS_WARBANDS_CHANNEL = 0;
+        public static int FC_PROMOTION_LIMIT = 0;
         public static List<ulong> ADMIN_ID = new List<ulong>();
 
         public static string FILEPATH = "C:\\Minigames\\";
@@ -44,7 +45,8 @@ namespace MinigamesDiscordBot
                     MINIGAMES_GEOBIE_CHANNEL = Convert.ToUInt64(csv[4]);
                     MINIGAMES_WARBANDS_CHANNEL = Convert.ToUInt64(csv[5]);
                     WARBANDS_WARBANDS_CHANNEL = Convert.ToUInt64(csv[6]);
-                    string[] adminids = csv[7].Split(';');
+                    FC_PROMOTION_LIMIT = Convert.ToInt32(csv[7]);
+                    string[] adminids = csv[8].Split(';');
                     for(int i = 0; i < adminids.Length; ++i)
                     {
                         ADMIN_ID.Add(Convert.ToUInt64(adminids[i]));
@@ -79,7 +81,7 @@ namespace MinigamesDiscordBot
 
             sw.WriteLine(BOT_TOKEN + "," + SERVER_ID_MINIGAMES + "," + SERVER_ID_WARBANDS + "," +
                 MINIGAMES_CWS_CHANNEL + "," + MINIGAMES_GEOBIE_CHANNEL + "," + MINIGAMES_WARBANDS_CHANNEL + "," +
-                WARBANDS_WARBANDS_CHANNEL+ "," + idoutput);
+                WARBANDS_WARBANDS_CHANNEL + "," + FC_PROMOTION_LIMIT + "," + idoutput);
 
             sw.Dispose();
             file.Dispose();
