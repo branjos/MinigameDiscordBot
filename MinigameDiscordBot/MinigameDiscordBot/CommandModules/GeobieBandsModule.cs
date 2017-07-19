@@ -21,12 +21,12 @@ namespace MinigamesDiscordBot.CommandModules
 
             EmbedFieldBuilder GeobieHelpCommandField = new EmbedFieldBuilder();
             GeobieHelpCommandField.Name = "Goebiebands Commands";
-            GeobieHelpCommandField.Value = "`-s <world> <type> <user>`\n`-dead <world>`\n`-removeworld <world>`\n`-clearinfo`\n`-outputtotals`";
+            GeobieHelpCommandField.Value = "`-s <world> <type> <user>`\n`-dead <world>`\n`-removeworld <world>`";
             GeobieHelpCommandField.WithIsInline(true);
             EmbedFieldBuilder GeobieHelpDescriptionField = new EmbedFieldBuilder();
             GeobieHelpDescriptionField.Name = "Description";
             GeobieHelpDescriptionField.IsInline = true;
-            GeobieHelpDescriptionField.Value = "Registers a scout. Types: a, f, w.\nMark a world dead.\nRemoves a world from the list.\nClears the current Goebiebands info.\nPrints out total number of scouts per user.";
+            GeobieHelpDescriptionField.Value = "Registers a scout. Types: a, f, w.\nMark a world dead.\nRemoves a world from the list.";
 
             eb1.AddField(GeobieHelpCommandField);
             eb1.AddField(GeobieHelpDescriptionField);
