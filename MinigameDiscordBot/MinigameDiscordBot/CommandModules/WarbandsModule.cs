@@ -12,10 +12,24 @@ namespace MinigameDiscordBot.CommandModules
         Warbands _bands;
         DiscordSocketClient _client;
 
+        EmbedBuilder eb = new EmbedBuilder();
+
         public WarbandsModule(Warbands bands, DiscordSocketClient client)
         {
             _bands = bands;
             _client = client;
+
+            EmbedFieldBuilder WarbandsHelpCommandField = new EmbedFieldBuilder();
+            WarbandsHelpCommandField.Name = "Warbands Commands";
+            WarbandsHelpCommandField.Value = "`-w <world> <type>`\n`-ClearWarbands`";
+            WarbandsHelpCommandField.WithIsInline(true);
+            EmbedFieldBuilder WarbandsHelpDescriptionField = new EmbedFieldBuilder();
+            WarbandsHelpDescriptionField.Name = "Description";
+            WarbandsHelpDescriptionField.IsInline = true;
+            WarbandsHelpDescriptionField.Value = "Adds or edits a world, values: dwf, elm, rdi, broken, dead.\nClears the current list.";
+
+            eb.AddField(WarbandsHelpCommandField);
+            eb.AddField(WarbandsHelpDescriptionField);
         }
 
         [Command("w")]
@@ -105,10 +119,11 @@ namespace MinigameDiscordBot.CommandModules
             var messages1 = await minigamesChannel.GetMessagesAsync(100).Flatten();
             await minigamesChannel.DeleteMessagesAsync(messages1);
 
-        //    var messages2 = await warbandsChannel.GetMessagesAsync(100).Flatten();
-        //    await warbandsChannel.DeleteMessagesAsync(messages2);
+            //    var messages2 = await warbandsChannel.GetMessagesAsync(100).Flatten();
+            //    await warbandsChannel.DeleteMessagesAsync(messages2);
 
             //give output
+            await minigamesChannel.SendMessageAsync("", false, eb);
             await minigamesChannel.SendMessageAsync(_bands.GetOutput());
          //   await warbandsChannel.SendMessageAsync(_bands.GetOutput());
         }
