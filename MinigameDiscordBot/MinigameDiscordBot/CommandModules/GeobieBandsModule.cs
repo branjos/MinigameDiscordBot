@@ -67,7 +67,7 @@ namespace MinigamesDiscordBot.CommandModules
         }
 
         [Command("ClearInfo")]
-        public async Task PrintScouts()
+        public async Task ClearScouts()
         {
             //getting the user on the server to see their roles
             SocketGuild s = _client.GetGuild(Config.SERVER_ID_MINIGAMES);
