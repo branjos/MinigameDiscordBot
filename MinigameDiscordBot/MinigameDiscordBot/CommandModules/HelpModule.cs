@@ -82,12 +82,12 @@ namespace MinigamesDiscordBot.CommandModules
             //admin embed
             EmbedFieldBuilder GeobieAdminCommandField = new EmbedFieldBuilder();
             GeobieAdminCommandField.Name = "Goebiebands Commands";
-            GeobieAdminCommandField.Value = "`-clearinfo`\n`-outputtotals`\n";
+            GeobieAdminCommandField.Value = "`-clearinfo`\n`-outputtotals`\n`-ResetDaily`";
             GeobieAdminCommandField.WithIsInline(true);
             EmbedFieldBuilder GeobieAdminDescriptionField = new EmbedFieldBuilder();
             GeobieAdminDescriptionField.Name = "Description";
             GeobieAdminDescriptionField.IsInline = true;
-            GeobieAdminDescriptionField.Value = "`Clears the current Goebiebands info`\n`Prints out total number of scouts per user`\n";
+            GeobieAdminDescriptionField.Value = "`Clears the current Goebiebands info`\n`Prints out total number of scouts per user`\n`Resets the day's progress`";
 
             EmbedFieldBuilder FCAdminCommands = new EmbedFieldBuilder();
             FCAdminCommands.Name = "FC Commands";

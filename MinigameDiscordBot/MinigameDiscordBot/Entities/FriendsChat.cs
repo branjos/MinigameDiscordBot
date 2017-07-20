@@ -89,12 +89,13 @@ namespace MinigameDiscordBot.Entities
             return "List Cleared";
         }
 
-        public void DailyReset()
+        public string DailyReset()
         {
             foreach (User u in users)
             {
                 u.SeenToday = false;
             }
+            return "Daily reset complete.";
         }
 
     }

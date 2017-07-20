@@ -72,6 +72,19 @@ namespace MinigameDiscordBot.CommandModules
             }
         }
 
+        [Command("ResetDaily")]
+        public async Task DailyFcReset()
+        {
+            if (IsAdmin(Context.User.Id))
+            {
+                await ReplyAsync(_fc.DailyReset());
+            }
+            else
+            {
+                await ReplyAsync("You do not have permission to do this.");
+            }
+        }
+
         private bool IsAdmin(ulong id)
         {
             SocketGuild s = _client.GetGuild(Config.SERVER_ID_MINIGAMES);
