@@ -28,8 +28,13 @@ namespace MinigamesDiscordBot.CommandModules
             GeobieHelpDescriptionField.IsInline = true;
             GeobieHelpDescriptionField.Value = "Registers a scout. Types: a, f, w.\nMark a world dead.\nRemoves a world from the list.";
 
+
+
             eb1.AddField(GeobieHelpCommandField);
             eb1.AddField(GeobieHelpDescriptionField);
+            eb1.Description = "Early spawn worlds: 12, 14, 15, 30, 37, 49, 50, 51, 65, 83, 84\n" +
+                "Early spawn worlds spawn at: 02 and die at: 22\n" +
+                "All other worlds spawn at: 05 and die at: 25";
         }
 
         [Command("s")]
