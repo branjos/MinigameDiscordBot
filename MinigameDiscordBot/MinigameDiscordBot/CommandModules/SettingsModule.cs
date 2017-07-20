@@ -183,5 +183,23 @@ namespace MinigameDiscordBot.CommandModules
                 await ReplyAsync("You do not have permission to use this command.");
             }
         }
+
+        [Command("MSetLogChannel")]
+        public async Task LogChannel(ulong id)
+        {
+            if (Config.ADMIN_ID.Contains(Context.User.Id))
+            {
+                Config.MINIGAMES_LOG_CHANNEL = id;
+                Config.UpdateTextFile();
+                Logger l = new Logger();
+                l.Log(Context.User.ToString() + " updated Warbands' Warbands Channel Id");
+                l.Dispose();
+                await ReplyAsync("Id updated.");
+            }
+            else
+            {
+                await ReplyAsync("You do not have permission to use this command.");
+            }
+        }
     }
 }
