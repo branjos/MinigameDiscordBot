@@ -2,7 +2,9 @@
 using Discord.Commands;
 using Discord.WebSocket;
 using MinigameDiscordBot.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MinigamesDiscordBot.CommandModules
@@ -80,7 +82,7 @@ namespace MinigamesDiscordBot.CommandModules
             //loopsing through roles to see if they have the correct one
             foreach (SocketRole role in u.Roles)
             {
-                if (role.Name == "Geobies" || role.Name == "Goobies" || s.Owner.Id == Context.User.Id)
+                if (role.Name == "Admin" || s.Owner.Id == Context.User.Id)
                 {
                     roleFound = true;
                 }
@@ -177,7 +179,7 @@ namespace MinigamesDiscordBot.CommandModules
             if (roleFound)
             {
                 await ReplyAsync(_bands.RemoveWorld(worldNum));
-                await UpdateTextChannel(Context.User.ToString() + " removed world " + worldNum);
+                await UpdateTextChannel("[" + DateTime.Now.ToString() + " - " + Context.User.ToString() + "] " +  " removed world " + worldNum);
             }
             else
             {
@@ -225,10 +227,12 @@ namespace MinigamesDiscordBot.CommandModules
 
             //delete any and all previous messages
             var messages = await channel.GetMessagesAsync(100).Flatten();
-            await channel.DeleteMessagesAsync(messages);
+            List<IMessage> list = messages.ToList<IMessage>();
+            list.RemoveAt(list.Count - 1);
+            await channel.DeleteMessagesAsync(list);
 
             //give output
-            await channel.SendMessageAsync("", false, eb1);
+            //await channel.SendMessageAsync("", false, eb1);
             await channel.SendMessageAsync(_bands.GetOutput());
             await log.SendMessageAsync(message);
         }
