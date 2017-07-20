@@ -110,7 +110,7 @@ namespace MinigamesDiscordBot.CommandModules
             //loopsing through roles to see if they have the correct one
             foreach (SocketRole role in u.Roles)
             {
-                if (role.Name == "Geobies" || role.Name == "Goobies" || s.Owner.Id == Context.User.Id)
+                if (role.Name == "Admin" || s.Owner.Id == Context.User.Id)
                 {
                     roleFound = true;
                 }
@@ -123,12 +123,6 @@ namespace MinigamesDiscordBot.CommandModules
             {
                 await ReplyAsync("You do not have permission to use this!");
             }
-        }
-
-        [Command("Refresh")]
-        public async Task RefreshInfo()
-        {
-            await UpdateTextChannel("");
         }
 
         [Command("Dead")]
@@ -179,7 +173,7 @@ namespace MinigamesDiscordBot.CommandModules
             if (roleFound)
             {
                 await ReplyAsync(_bands.RemoveWorld(worldNum));
-                await UpdateTextChannel("[" + DateTime.Now.ToString() + " - " + Context.User.ToString() + "] " +  " removed world " + worldNum);
+                await UpdateTextChannel("[" + Context.User.ToString() + "] " +  " removed world " + worldNum);
             }
             else
             {
@@ -223,7 +217,7 @@ namespace MinigamesDiscordBot.CommandModules
         {
             SocketGuild guild = _client.GetGuild(Config.SERVER_ID_MINIGAMES);//loads server info
             SocketTextChannel channel = guild.GetTextChannel(Config.MINIGAMES_GEOBIE_CHANNEL); //loads channel info
-            SocketTextChannel log = guild.GetTextChannel(337583654505152513);
+            SocketTextChannel log = guild.GetTextChannel(Config.MINIGAMES_LOG_CHANNEL);
 
             //delete any and all previous messages
             var messages = await channel.GetMessagesAsync(100).Flatten();
