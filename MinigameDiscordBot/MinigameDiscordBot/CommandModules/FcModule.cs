@@ -2,9 +2,6 @@
 using Discord.WebSocket;
 using MinigameDiscordBot.Entities;
 using MinigamesDiscordBot;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MinigameDiscordBot.CommandModules
