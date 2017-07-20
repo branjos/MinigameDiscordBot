@@ -55,7 +55,7 @@ namespace MinigamesDiscordBot.CommandModules
             EmbedFieldBuilder CoordHelpDescriptionField = new EmbedFieldBuilder();
             CoordHelpDescriptionField.Name = "Description";
             CoordHelpDescriptionField.IsInline = true;
-            CoordHelpDescriptionField.Value = "Starts games of Castle Wars.\nChanges the coordinator of the game.\n" +
+            CoordHelpDescriptionField.Value = "Starts games of Castle Wars or Soul Wars.\nChanges the coordinator of the game.\n" +
                 "Adds a perm member to either team.\nAdds a rotating member to available team.\nRemoves a user from the games.\n" +
                 "Use this at the start of each round to switch teams.\nThis closes the games.";
 
@@ -92,12 +92,12 @@ namespace MinigamesDiscordBot.CommandModules
 
             EmbedFieldBuilder FCAdminCommands = new EmbedFieldBuilder();
             FCAdminCommands.Name = "FC Commands";
-            FCAdminCommands.Value = "`-See <username>`\n`-printlist`\n`-promotions`\n`-clearfc`";
+            FCAdminCommands.Value = "`-See <username>`\n`-printlist`\n`-promotions`\n`-clearfc`\n`-dailyreset`";
             FCAdminCommands.WithIsInline(true);
             EmbedFieldBuilder FCAdminDescription = new EmbedFieldBuilder();
             FCAdminDescription.Name = "Description";
             FCAdminDescription.IsInline = true;
-            FCAdminDescription.Value = "`Marks the user as seen`\n`Prints the list`\n`Prints promotions`\n`Clears all info`";
+            FCAdminDescription.Value = "`Marks the user as seen`\n`Prints the list`\n`Prints promotions`\n`Clears all info`\n`Resets daily progress`";
 
             //settings commands
             EmbedFieldBuilder SettingsCommandField = new EmbedFieldBuilder();
@@ -159,7 +159,7 @@ namespace MinigamesDiscordBot.CommandModules
 
             EmbedFieldBuilder features = new EmbedFieldBuilder();
             features.Name = "Notable Features";
-            features.Value = "-Geobiebands tracking\n-Castlewars tracking\n-Warbands scouting\n-FC management";
+            features.Value = "-Geobiebands tracking\n-Castle Wars & Soul Wars tracking\n-Warbands scouting\n-FC management";
 
             EmbedFieldBuilder dev = new EmbedFieldBuilder();
             dev.Name = "Bot Developer";

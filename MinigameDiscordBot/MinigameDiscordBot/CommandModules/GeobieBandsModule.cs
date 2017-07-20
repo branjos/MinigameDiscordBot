@@ -59,7 +59,7 @@ namespace MinigamesDiscordBot.CommandModules
             if (roleFound)
             {
                 await ReplyAsync(_bands.AddWorld(username, world, skill));
-                await UpdateTextChannel();
+                await UpdateTextChannel("[" + Context.User.ToString() + "] - "+ username + " scouted world as " + skill + ": " + world);
             }
             else
             {
@@ -88,7 +88,7 @@ namespace MinigamesDiscordBot.CommandModules
             if (roleFound)
             {
                 await ReplyAsync(_bands.ClearInfo());
-                await UpdateTextChannel();
+                await UpdateTextChannel("[" + Context.User.ToString() + "] - " + " Imformation cleared.");
             }
             else
             {
@@ -126,11 +126,11 @@ namespace MinigamesDiscordBot.CommandModules
         [Command("Refresh")]
         public async Task RefreshInfo()
         {
-            await UpdateTextChannel();
+            await UpdateTextChannel("");
         }
 
         [Command("Dead")]
-        public async Task MarkWorldAsDead(int world)
+        public async Task MarkWorldAsDead(int world, [Remainder]string username)
         {
             //getting the user on the server to see their roles
             SocketGuild s = _client.GetGuild(Config.SERVER_ID_MINIGAMES);
@@ -149,7 +149,7 @@ namespace MinigamesDiscordBot.CommandModules
             if (roleFound)
             {
                 await ReplyAsync(_bands.MarkAsDead(world));
-                await UpdateTextChannel();
+                await UpdateTextChannel("[" + Context.User.ToString() + "] - " + username + " marked world as dead: " + world);
             }
             else
             {
@@ -177,7 +177,7 @@ namespace MinigamesDiscordBot.CommandModules
             if (roleFound)
             {
                 await ReplyAsync(_bands.RemoveWorld(worldNum));
-                await UpdateTextChannel();
+                await UpdateTextChannel(Context.User.ToString() + " removed world " + worldNum);
             }
             else
             {
@@ -217,10 +217,11 @@ namespace MinigamesDiscordBot.CommandModules
         }
 
 
-        private async Task UpdateTextChannel()
+        private async Task UpdateTextChannel(string message)
         {
             SocketGuild guild = _client.GetGuild(Config.SERVER_ID_MINIGAMES);//loads server info
             SocketTextChannel channel = guild.GetTextChannel(Config.MINIGAMES_GEOBIE_CHANNEL); //loads channel info
+            SocketTextChannel log = guild.GetTextChannel(337583654505152513);
 
             //delete any and all previous messages
             var messages = await channel.GetMessagesAsync(100).Flatten();
@@ -229,6 +230,7 @@ namespace MinigamesDiscordBot.CommandModules
             //give output
             await channel.SendMessageAsync("", false, eb1);
             await channel.SendMessageAsync(_bands.GetOutput());
+            await log.SendMessageAsync(message);
         }
     }
 }
