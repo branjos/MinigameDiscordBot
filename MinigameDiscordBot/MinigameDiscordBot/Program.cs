@@ -113,8 +113,8 @@ namespace MinigamesDiscordBot
             await _commands.AddModuleAsync<FcModule>();
 
 
-            //add timers
-            TimerContainer timers = new TimerContainer(_services);
+            //add timers - removed not working
+            //TimerContainer timers = new TimerContainer(_services);
 
             // Subscribe a handler to see if a message invokes a command.
             _client.MessageReceived += HandleCommandAsync;
