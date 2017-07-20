@@ -58,7 +58,7 @@ namespace MinigamesDiscordBot.CommandModules
             //loopsing through roles to see if they have the correct one
             foreach (SocketRole role in u.Roles)
             {
-                if(role.Name == "Castle Wars Coordinator" || s.Owner.Id == Context.User.Id)
+                if(role.Name == "Coordinator" || s.Owner.Id == Context.User.Id)
                 {
                     _game.ClearGame(); //clears previous lists 
                     _game.GameController = Context.User.ToString(); //sets the controller to whoever used this command
