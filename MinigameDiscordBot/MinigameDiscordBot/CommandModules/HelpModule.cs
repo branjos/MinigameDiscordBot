@@ -39,12 +39,12 @@ namespace MinigamesDiscordBot.CommandModules
             //general commands
             EmbedFieldBuilder GeneralHelpCommandField = new EmbedFieldBuilder();
             GeneralHelpCommandField.Name = "General Help";
-            GeneralHelpCommandField.Value = "`-Help`\n`-About`\n`-Spotlight`";
+            GeneralHelpCommandField.Value = "`-Help`\n`-About`";
             GeneralHelpCommandField.WithIsInline(true);
             EmbedFieldBuilder GeneralHelpDescriptionField = new EmbedFieldBuilder();
             GeneralHelpDescriptionField.Name = "Description";
             GeneralHelpDescriptionField.IsInline = true;
-            GeneralHelpDescriptionField.Value = "This command.\nGeneral information about this bot.\nMinigame Spotlight information.";
+            GeneralHelpDescriptionField.Value = "This command.\nGeneral information about this bot.";
 
             //coord commands
             EmbedFieldBuilder CoordHelpCommandField = new EmbedFieldBuilder();
@@ -112,7 +112,7 @@ namespace MinigamesDiscordBot.CommandModules
             SettingsDescriptionField.IsInline = true;
             SettingsDescriptionField.Value = "`Sets the warbands server`\n`Sets the minigames server`\n`Sets the minigames cws channel`\n" +
                 "`Sets the minigames geobie channel`\n`Sets the minigames wbs channel`\n`Sets the warbands wbs channel`\n" +
-                "`Adds a bot admin`\n`Removes a bot admin`\n`Sets number of sees needed for promotion`";
+                "`Adds a bot admin`\n`Removes a bot admin`\n`Sets number needed for promotion`";
 
             //add embed fields to the builders
             eb.AddField(GeneralHelpCommandField);
@@ -167,7 +167,7 @@ namespace MinigamesDiscordBot.CommandModules
 
             EmbedFieldBuilder cont = new EmbedFieldBuilder();
             cont.Name = "Contributors";
-            cont.Value = "RSN: Minigames\nRSN: Bepo\nRSN: xMiley";
+            cont.Value = "RSN: Minigames\nRSN: Bepo\nRSN: xMiley\nRSN: Snickers";
 
             EmbedFooterBuilder foot = new EmbedFooterBuilder();
             foot.Text = "Version: 1.0.0 | Made using .NET Core and Discord.Net 1.0 rc-2";
