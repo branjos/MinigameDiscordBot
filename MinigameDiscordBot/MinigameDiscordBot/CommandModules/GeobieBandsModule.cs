@@ -61,6 +61,19 @@ namespace MinigamesDiscordBot.CommandModules
             if (roleFound)
             {
                 await ReplyAsync(_bands.AddWorld(username, world, skill));
+
+                switch (skill)
+                {
+                    case "a":
+                        skill = "Agility/Crafting";
+                        break;
+                    case "f":
+                        skill = "Farming/Herblore";
+                        break;
+                    case "w":
+                        skill = "Hunter/Woodutting";
+                        break;
+                }
                 await UpdateTextChannel("[" + Context.User.ToString() + "] - "+ username + " scouted world as " + skill + ": " + world);
             }
             else
@@ -126,7 +139,7 @@ namespace MinigamesDiscordBot.CommandModules
         }
 
         [Command("Dead")]
-        public async Task MarkWorldAsDead(int world, [Remainder]string username)
+        public async Task MarkWorldAsDead(int world)
         {
             //getting the user on the server to see their roles
             SocketGuild s = _client.GetGuild(Config.SERVER_ID_MINIGAMES);
@@ -145,7 +158,7 @@ namespace MinigamesDiscordBot.CommandModules
             if (roleFound)
             {
                 await ReplyAsync(_bands.MarkAsDead(world));
-                await UpdateTextChannel("[" + Context.User.ToString() + "] - " + username + " marked world as dead: " + world);
+                await UpdateTextChannel("[" + Context.User.ToString() + "] - Marked world as dead: " + world);
             }
             else
             {
