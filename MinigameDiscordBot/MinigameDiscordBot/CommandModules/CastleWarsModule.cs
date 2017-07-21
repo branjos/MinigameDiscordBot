@@ -103,7 +103,7 @@ namespace MinigamesDiscordBot.CommandModules
 
                 if (_game.GameController == Context.User.ToString() || Context.Guild.OwnerId == Context.User.Id)
                 {
-                    output = _game.AddRotating(u);
+                    output = _game.AddRotating(u.ToLower());
                     await UpdateTextChannel();
                 }
                 await ReplyAsync(output);
@@ -117,7 +117,7 @@ namespace MinigamesDiscordBot.CommandModules
 
             if (_game.GameController == Context.User.ToString() || Context.Guild.OwnerId == Context.User.Id)
             {
-                output = _game.RemoveUser(username);
+                output = _game.RemoveUser(username.ToLower());
                 await UpdateTextChannel();
             }
 
