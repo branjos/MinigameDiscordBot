@@ -26,14 +26,14 @@ namespace MinigamesDiscordBot.CommandModules
             EmbedFieldBuilder CoordHelpCommandField = new EmbedFieldBuilder();
             CoordHelpCommandField.Name = "Coordination Commands";
             CoordHelpCommandField.Value = "`-StartGames`\n`-ChangeCoord <user#1111>`\n`-AddP <s, z> <username>`\n" +
-                "`-AddR <username>`\n`-Remove <username>`\n`-NewRound`\n`-StopGames`\n`-SetGamesLeft <num> <user>`";
+                "`-AddR <username>`\n`-Remove <username>`\n`-NewRound`\n`-StopGames`";
             CoordHelpCommandField.WithIsInline(true);
             EmbedFieldBuilder CoordHelpDescriptionField = new EmbedFieldBuilder();
             CoordHelpDescriptionField.Name = "Description";
             CoordHelpDescriptionField.IsInline = true;
             CoordHelpDescriptionField.Value = "Starts games of Castle Wars.\nChanges the coordinator of the game.\n" +
                 "Adds a perm member to either team.\nAdds a rotating member to available team.\nRemoves a user from the games.\n" +
-                "Use this at the start of each round to switch teams.\nThis closes the games.\nSets number of games left for a user.";
+                "Use this at the start of each round to switch teams.\nThis closes the games.";
 
             eb.AddField(CoordHelpCommandField);
             eb.AddField(CoordHelpDescriptionField);
@@ -206,20 +206,6 @@ namespace MinigamesDiscordBot.CommandModules
                 {
                     await ReplyAsync("There is no user in this channel with the name: " + user);
                 }
-            }
-            else
-            {
-                await ReplyAsync("You are not the game coordinator or a server owner.");
-            }
-        }
-
-        [Command("SetGamesLeft")]
-        public async Task SetGamesLeft(int numGames, [Remainder]string user)
-        {
-            if (_game.GameController == Context.User.ToString() || Context.Guild.OwnerId == Context.User.Id)
-            {
-                await ReplyAsync(_game.SetGamesLeft(user.ToLower(), numGames));
-                await UpdateTextChannel();
             }
             else
             {

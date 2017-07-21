@@ -136,11 +136,6 @@ namespace MinigamesDiscordBot.Entities
             {
                 saradominTeam[i].ConsecutiveWins++;
 
-                if(saradominTeam[i].GamesLeft != -1)
-                {
-                    saradominTeam[i].GamesLeft--;
-                }
-
                 if (!saradominTeam[i].Username.Contains("*"))
                 {
                     temp1.Add(saradominTeam[i]);
@@ -151,11 +146,6 @@ namespace MinigamesDiscordBot.Entities
             //loop through all zam team members, if not a perm - put them in a temp list
             for (int i = 0; i < zamorakTeam.Count; ++i)
             {
-                if(zamorakTeam[i].GamesLeft != -1)
-                {
-                    zamorakTeam[i].GamesLeft--;
-                }
-
                 if (!zamorakTeam[i].Username.Contains("*"))
                 {
                     temp2.Add(zamorakTeam[i]);
@@ -177,42 +167,6 @@ namespace MinigamesDiscordBot.Entities
             startTime = DateTime.Now; //update starttime to reflect when new round started.
 
             return "New teams assigned.";
-        }
-
-        //sets a number of rounds left before someone leaves
-        public string SetGamesLeft(string username, int numGames)
-        {
-            CwsUser u = new CwsUser(username);
-            CwsUser u2 = new CwsUser(username + "*");
-            string output = "";
-
-            if(zamorakTeam.Contains(u) || zamorakTeam.Contains(u2))
-            {
-                for(int i = 0; i < zamorakTeam.Count; ++i)
-                {
-                    if(zamorakTeam[i].Equals(u) || zamorakTeam[i].Equals(u2))
-                    {
-                        zamorakTeam[i].GamesLeft = numGames;
-                        output = u.Username + " set to have " + numGames + " games left.";
-                    }
-                }
-            }
-            else if (saradominTeam.Contains(u) || saradominTeam.Contains(u2))
-            {
-                for (int i = 0; i < saradominTeam.Count; ++i)
-                {
-                    if (saradominTeam[i].Equals(u) || saradominTeam[i].Equals(u2))
-                    {
-                        saradominTeam[i].GamesLeft = numGames;
-                        output = u.Username + " set to have " + numGames + " games left.";
-                    }
-                }
-            }
-            else
-            {
-                output = username + " not found.";
-            }
-            return output;
         }
 
         private void EvenOutSides()
@@ -318,35 +272,11 @@ namespace MinigamesDiscordBot.Entities
                     {
                         if (i + 1 > zamorakTeam.Count) //if iterator is greater than number of zam players
                         {
-                            if (saradominTeam[i].GamesLeft > 0)
-                            {
-                                o.addLine(saradominTeam[i].Username + "(" + saradominTeam[i].GamesLeft + ")", "");
-                            }
-                            else
-                            {
-                                o.addLine(saradominTeam[i].Username, ""); //add line with nothing on one side
-                            }
+                            o.addLine(saradominTeam[i].Username, ""); //add line with nothing on one side
                         }
                         else
                         {
-                            if (saradominTeam[i].GamesLeft > 0 || zamorakTeam[i].GamesLeft > 0)
-                            {
-                                string sara = "";
-                                string zam = "";
-                                if(saradominTeam[i].GamesLeft > 0)
-                                {
-                                    sara = saradominTeam[i].Username + "(" + saradominTeam[i].GamesLeft + ")";
-                                }
-                                if(zamorakTeam[i].GamesLeft > 0)
-                                {
-                                    zam = zamorakTeam[i].Username + "(" + zamorakTeam[i].GamesLeft + ")";
-                                }
-                                o.addLine(sara, zam);
-                            }
-                            else
-                            {
-                                o.addLine(saradominTeam[i].Username, zamorakTeam[i].Username); //add both names
-                            }
+                            o.addLine(saradominTeam[i].Username, zamorakTeam[i].Username); //add both names
                         }
                     }
 
@@ -360,35 +290,11 @@ namespace MinigamesDiscordBot.Entities
                     {
                         if (i + 1 > saradominTeam.Count)
                         {
-                            if (zamorakTeam[i].GamesLeft > 0)
-                            {
-                                o.addLine("", zamorakTeam[i].Username + "(" + zamorakTeam[i].GamesLeft + ")");
-                            }
-                            else
-                            {
-                                o.addLine("", zamorakTeam[i].Username);
-                            }
+                            o.addLine("", zamorakTeam[i].Username);
                         }
                         else
                         {
-                            if (saradominTeam[i].GamesLeft > 0 || zamorakTeam[i].GamesLeft > 0)
-                            {
-                                string sara = "";
-                                string zam = "";
-                                if (saradominTeam[i].GamesLeft > 0)
-                                {
-                                    sara = saradominTeam[i].Username + "(" + saradominTeam[i].GamesLeft + ")";
-                                }
-                                if (zamorakTeam[i].GamesLeft > 0)
-                                {
-                                    zam = zamorakTeam[i].Username + "(" + zamorakTeam[i].GamesLeft + ")";
-                                }
-                                o.addLine(sara, zam);
-                            }
-                            else
-                            {
-                                o.addLine(saradominTeam[i].Username, zamorakTeam[i].Username); //add both names
-                            }
+                            o.addLine(saradominTeam[i].Username, zamorakTeam[i].Username);
                         }
                     }
 

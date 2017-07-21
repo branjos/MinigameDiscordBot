@@ -6,12 +6,10 @@ namespace MinigamesDiscordBot.Entities
     {
         public string Username { get; set; }
         public int ConsecutiveWins { get; set; }
-        public int GamesLeft { get; set; }
 
         public CwsUser(string username)
         {
             Username = username;
-            GamesLeft = -1;
         }
 
         //implementing IEquateable<T> interface
