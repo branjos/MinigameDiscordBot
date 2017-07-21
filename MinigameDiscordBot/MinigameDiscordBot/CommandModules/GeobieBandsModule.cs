@@ -212,6 +212,33 @@ namespace MinigamesDiscordBot.CommandModules
             }
         }
 
+        [Command("PrintEmbed")]
+        public async Task PrintEmbed()
+        {
+            //getting the user on the server to see their roles
+            SocketGuild s = _client.GetGuild(Config.SERVER_ID_MINIGAMES);
+            SocketGuildUser u = s.GetUser(Context.User.Id);
+
+            bool roleFound = false; //to output correct message
+
+            //loopsing through roles to see if they have the correct one
+            foreach (SocketRole role in u.Roles)
+            {
+                if (role.Name == "Admin" || s.Owner.Id == Context.User.Id)
+                {
+                    roleFound = true;
+                }
+            }
+            if (roleFound)
+            {
+                await ReplyAsync("", false, eb1);
+            }
+            else
+            {
+                await ReplyAsync("You do not have permission to use this!");
+            }
+        }
+
 
         private async Task UpdateTextChannel(string message)
         {
