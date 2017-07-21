@@ -39,13 +39,6 @@ namespace MinigamesDiscordBot.CommandModules
             eb.AddField(CoordHelpDescriptionField);
         }
 
-
-        [Command("Hello")]
-        public async Task HelloWorld()
-        {
-            await ReplyAsync("Hello, " + Context.User.Username.ToString());
-        }
-
         [Command("StartGames")]
         public async Task Start()
         {
