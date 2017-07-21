@@ -83,7 +83,7 @@ namespace MinigamesDiscordBot.CommandModules
 
                 if (_game.GameController == Context.User.ToString() || Context.Guild.OwnerId == Context.User.Id)
                 {
-                    output = _game.AddPerm(u.ToLower(), side);
+                    output = _game.AddPerm(u, side);
                     await UpdateTextChannel();
                 }
 
