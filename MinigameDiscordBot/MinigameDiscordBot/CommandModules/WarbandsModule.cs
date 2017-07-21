@@ -36,22 +36,9 @@ namespace MinigameDiscordBot.CommandModules
         public async Task Insert(int world, string type)
         {
             bool roleFound = false;
-            string output = "";
+            string output = "";         
 
-            SocketGuild server = _client.GetGuild(Context.Guild.Id);
-            SocketGuildUser user = server.GetUser(Context.User.Id);
-
-            foreach(SocketRole role in user.Roles)
-            {
-                if(role.Name == "FC Member")
-                {
-                    roleFound = true;
-                    break;
-                }
-            }
-
-            if (roleFound)
-            {
+            
                 if(type.ToLower() == "dwf" || type.ToLower() == "elm" || type.ToLower() == "rdi")
                 {
                     output = _bands.AddWorld(world, type.ToLower());
@@ -64,11 +51,7 @@ namespace MinigameDiscordBot.CommandModules
                 {
                     output = "Invalid input. Please use command: `-w <world number> <location or status>`";
                 }
-            }
-            else
-            {
-                output = "You do not have permission to use this command.";
-            }
+            
 
             await UpdateChannel();
             await ReplyAsync(output);
@@ -80,26 +63,8 @@ namespace MinigameDiscordBot.CommandModules
             bool roleFound = false;
             string output = "";
 
-            SocketGuild server = _client.GetGuild(Context.Guild.Id);
-            SocketGuildUser user = server.GetUser(Context.User.Id);
-
-            foreach (SocketRole role in user.Roles)
-            {
-                if (role.Name == "FC Member")
-                {
-                    roleFound = true;
-                    break;
-                }
-            }
-
-            if (roleFound)
-            {
-                output = _bands.ClearList();
-            }
-            else
-            {
-                output = "You do not have permission to use this command.";
-            }
+            output = _bands.ClearList();
+            
 
             await UpdateChannel();
             await ReplyAsync(output);
@@ -125,6 +90,7 @@ namespace MinigameDiscordBot.CommandModules
             //give output
             await minigamesChannel.SendMessageAsync("", false, eb);
             await minigamesChannel.SendMessageAsync(_bands.GetOutput());
+            await warbandsChannel.SendMessageAsync("", false, eb);
             await warbandsChannel.SendMessageAsync(_bands.GetOutput());
         }
     }
