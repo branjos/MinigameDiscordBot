@@ -137,13 +137,13 @@ namespace MinigamesDiscordBot.CommandModules
 
             if (isAdmin)
             {
-                IDMChannel userChannel = await Context.User.CreateDMChannelAsync();
+                IDMChannel userChannel = await Context.User.GetOrCreateDMChannelAsync();
                 await userChannel.SendMessageAsync("", false, adminEmbed);
             }
 
             if (Config.ADMIN_ID.Contains(Context.User.Id))
             {
-                IDMChannel userChannel = await Context.User.CreateDMChannelAsync();
+                IDMChannel userChannel = await Context.User.GetOrCreateDMChannelAsync();
                 await userChannel.SendMessageAsync("", false, settingsEmbed);
             }
         }
@@ -170,7 +170,7 @@ namespace MinigamesDiscordBot.CommandModules
             cont.Value = "RSN: Minigames\nRSN: Bepo\nRSN: xMiley\nRSN: Snickers";
 
             EmbedFooterBuilder foot = new EmbedFooterBuilder();
-            foot.Text = "Version: 1.0.1 | Made using .NET Core and Discord.Net 1.0 rc-2";
+            foot.Text = "Version: 1.0.2 | Made using .NET Core and Discord.Net 1.0.2";
 
             eb.AddField(description);
             eb.AddField(features);
